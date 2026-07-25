@@ -9,18 +9,23 @@ import {
   getSubcategory,
   getSubcategoryPhotos,
 } from "@/content/portfolio";
+import { locales, resolveLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
 export function generateStaticParams() {
-  return getAllSubcategoryParams();
+  return locales.flatMap((locale) =>
+    getAllSubcategoryParams().map((p) => ({ locale, ...p }))
+  );
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ category: string; subcategory: string }>;
+  params: Promise<{ locale: string; category: string; subcategory: string }>;
 }): Promise<Metadata> {
-  const { category, subcategory } = await params;
-  const found = getSubcategory(category, subcategory);
+  const raw = await params;
+  const locale = resolveLocale(raw.locale);
+  const found = getSubcategory(locale, raw.category, raw.subcategory);
   if (!found) return {};
   return {
     title: found.subcategory.title,
@@ -31,10 +36,14 @@ export async function generateMetadata({
 export default async function SubcategoryPage({
   params,
 }: {
-  params: Promise<{ category: string; subcategory: string }>;
+  params: Promise<{ locale: string; category: string; subcategory: string }>;
 }) {
-  const { category, subcategory } = await params;
-  const found = getSubcategory(category, subcategory);
+  const raw = await params;
+  const locale = resolveLocale(raw.locale);
+  const category = raw.category;
+  const subcategory = raw.subcategory;
+  const dict = getDictionary(locale);
+  const found = getSubcategory(locale, category, subcategory);
   if (!found) notFound();
 
   const photos = getSubcategoryPhotos(category, subcategory);
@@ -59,9 +68,9 @@ export default async function SubcategoryPage({
       <Section>
         <FadeIn>
           <CTASection
-            title="Let's work together"
-            text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
-            ctaLabel="Contact via WhatsApp"
+            title={dict.common.letsWorkTogetherTitle}
+            text={dict.common.letsWorkTogetherText}
+            ctaLabel={dict.common.contactWhatsApp}
           />
         </FadeIn>
       </Section>

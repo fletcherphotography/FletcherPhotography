@@ -3,23 +3,42 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/CTASection";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { serviceGroups, pricingNote } from "@/content/services";
+import { getServiceGroups, getPricingNote } from "@/content/services";
+import { locales, resolveLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Photography services for businesses & events, personal branding, and portraits & love stories across Switzerland.",
-};
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
-export default function ServicesPage() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const locale = resolveLocale((await params).locale);
+  const dict = getDictionary(locale);
+  return { title: dict.services.title, description: dict.services.subtitle };
+}
+
+export default async function ServicesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = resolveLocale((await params).locale);
+  const dict = getDictionary(locale);
+  const serviceGroups = getServiceGroups(locale);
+  const pricingNote = getPricingNote(locale);
+
   return (
     <>
       <Section className="pt-20 sm:pt-28">
         <FadeIn>
           <SectionHeading
-            eyebrow="Services"
-            title="Photography for every kind of story"
-            subtitle="Clear, structured sessions with no overwhelming price lists — get in touch for a quote tailored to you."
+            eyebrow={dict.services.eyebrow}
+            title={dict.services.title}
+            subtitle={dict.services.subtitle}
           />
         </FadeIn>
       </Section>
@@ -33,7 +52,7 @@ export default function ServicesPage() {
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-600">{group.intro}</p>
               <div className="mt-8">
-                <Button href="/contact">{group.ctaLabel}</Button>
+                <Button href={`/${locale}/contact`}>{group.ctaLabel}</Button>
               </div>
             </div>
             {group.items && (
@@ -59,9 +78,9 @@ export default function ServicesPage() {
       <Section>
         <FadeIn>
           <CTASection
-            title="Let's work together"
-            text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
-            ctaLabel="Contact via WhatsApp"
+            title={dict.common.letsWorkTogetherTitle}
+            text={dict.common.letsWorkTogetherText}
+            ctaLabel={dict.common.contactWhatsApp}
           />
         </FadeIn>
       </Section>

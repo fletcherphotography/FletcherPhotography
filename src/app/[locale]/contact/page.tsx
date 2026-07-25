@@ -3,20 +3,31 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { ContactForm } from "@/components/ContactForm";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { site, whatsappHref } from "@/content/site";
+import { locales, resolveLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Get in touch to plan your photography session.",
-};
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
-export default function ContactPage() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const locale = resolveLocale((await params).locale);
+  const dict = getDictionary(locale);
+  return { title: dict.contact.title, description: dict.contact.subtitle };
+}
+
+export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = resolveLocale((await params).locale);
+  const dict = getDictionary(locale);
+
   return (
     <Section className="pt-20 sm:pt-28" containerClassName="max-w-2xl">
       <FadeIn>
-        <SectionHeading
-          title="Let's plan your shoot."
-          subtitle="Tell me a little about what you have in mind, and I'll get back to you with the next steps."
-        />
+        <SectionHeading title={dict.contact.title} subtitle={dict.contact.subtitle} />
 
         <div className="mt-10 flex flex-wrap gap-6 text-sm text-neutral-600">
           <a
@@ -36,7 +47,7 @@ export default function ContactPage() {
         </div>
 
         <div className="mt-10">
-          <ContactForm />
+          <ContactForm locale={locale} />
         </div>
       </FadeIn>
     </Section>

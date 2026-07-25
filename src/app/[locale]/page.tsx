@@ -7,15 +7,23 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { CTASection } from "@/components/CTASection";
 import { Button } from "@/components/ui/Button";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn";
-import { testimonials } from "@/content/testimonials";
-import { processSteps } from "@/content/process";
+import { getTestimonials } from "@/content/testimonials";
+import { getProcessSteps } from "@/content/process";
 import { brandLogos } from "@/content/brandLogos";
-import { faqItems } from "@/content/faq";
+import { getFaqItems } from "@/content/faq";
+import { resolveLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
-export default function Home() {
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = resolveLocale((await params).locale);
+  const dict = getDictionary(locale);
+  const testimonials = getTestimonials(locale);
+  const processSteps = getProcessSteps(locale);
+  const faqItems = getFaqItems(locale);
+
   return (
     <>
-      <Hero />
+      <Hero locale={locale} />
 
       {/* Intro */}
       <Section className="pt-20 sm:pt-28">
@@ -23,25 +31,23 @@ export default function Home() {
           <div className="grid gap-10 sm:grid-cols-2 sm:gap-16">
             <div>
               <h2 className="text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
-                You feel at ease during the shoot
+                {dict.home.introTitle1}
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-600">
-                Clear, relaxed direction helps you look natural and confident, without feeling
-                overly posed.
+                {dict.home.introText1}
               </p>
             </div>
             <div>
               <h2 className="text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
-                You receive images with purpose
+                {dict.home.introTitle2}
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-600">
-                Photography created for your website, social media, marketing, press, team
-                communication or a meaningful personal memory.
+                {dict.home.introText2}
               </p>
             </div>
           </div>
           <div className="mt-10">
-            <Button href="/portfolio">View portfolio</Button>
+            <Button href={`/${locale}/portfolio`}>{dict.common.viewPortfolio}</Button>
           </div>
         </FadeIn>
       </Section>
@@ -49,7 +55,7 @@ export default function Home() {
       {/* Block 6: testimonials */}
       <Section className="bg-neutral-50">
         <FadeIn>
-          <SectionHeading title="Kind words and the faces behind them" align="center" />
+          <SectionHeading title={dict.home.testimonialsTitle} align="center" />
         </FadeIn>
         <FadeInStagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {testimonials.map((t) => (
@@ -63,7 +69,7 @@ export default function Home() {
       {/* Block 7: process */}
       <Section>
         <FadeIn>
-          <SectionHeading eyebrow="Process" title="Simple from first message to final gallery" />
+          <SectionHeading eyebrow={dict.home.processEyebrow} title={dict.home.processTitle} />
         </FadeIn>
         <FadeInStagger className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((step) => (
@@ -77,7 +83,7 @@ export default function Home() {
       {/* Block 8: brands */}
       <Section className="bg-neutral-50">
         <FadeIn>
-          <SectionHeading title="Trusted by Brands and Organisations Across Switzerland" align="center" />
+          <SectionHeading title={dict.home.brandsTitle} align="center" />
           <div className="mt-12">
             <LogoStrip logos={brandLogos} />
           </div>
@@ -87,7 +93,7 @@ export default function Home() {
       {/* Block 9: FAQ */}
       <Section containerClassName="max-w-3xl">
         <FadeIn>
-          <SectionHeading title="Frequently Asked Questions" />
+          <SectionHeading title={dict.home.faqTitle} />
           <div className="mt-8">
             <FaqAccordion items={faqItems} />
           </div>
@@ -98,9 +104,9 @@ export default function Home() {
       <Section>
         <FadeIn>
           <CTASection
-            title="Let's work together"
-            text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
-            ctaLabel="Contact via WhatsApp"
+            title={dict.common.letsWorkTogetherTitle}
+            text={dict.common.letsWorkTogetherText}
+            ctaLabel={dict.common.contactWhatsApp}
           />
         </FadeIn>
       </Section>

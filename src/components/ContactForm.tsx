@@ -4,8 +4,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, ContactFormValues } from "@/lib/contactSchema";
+import { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
-export function ContactForm() {
+export function ContactForm({ locale }: { locale: Locale }) {
+  const dict = getDictionary(locale);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const {
     register,
@@ -35,9 +38,7 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div className="rounded-2xl border border-neutral-200 p-8 text-center">
-        <p className="text-base text-neutral-900">
-          Thank you your message is on its way. I&apos;ll get back to you as soon as possible.
-        </p>
+        <p className="text-base text-neutral-900">{dict.contact.success}</p>
       </div>
     );
   }
@@ -46,7 +47,7 @@ export function ContactForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5" noValidate>
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-neutral-700">
-          Full name
+          {dict.contact.fullName}
         </label>
         <input
           id="name"
@@ -59,7 +60,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-neutral-700">
-          Email
+          {dict.contact.email}
         </label>
         <input
           id="email"
@@ -72,7 +73,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-neutral-700">
-          Phone number <span className="text-neutral-400">(optional)</span>
+          {dict.contact.phone} <span className="text-neutral-400">{dict.contact.phoneOptional}</span>
         </label>
         <input
           id="phone"
@@ -84,7 +85,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-neutral-700">
-          Tell me about your idea
+          {dict.contact.message}
         </label>
         <textarea
           id="message"
@@ -103,25 +104,23 @@ export function ContactForm() {
           {...register("consent")}
         />
         <label htmlFor="consent" className="text-sm text-neutral-600">
-          I agree to the{" "}
-          <a href="/privacy-policy" className="underline">
-            Privacy Policy
+          {dict.contact.consent}{" "}
+          <a href={`/${locale}/privacy-policy`} className="underline">
+            {dict.contact.privacyPolicy}
           </a>
           .
         </label>
       </div>
       {errors.consent && <p className="text-xs text-red-600">{errors.consent.message}</p>}
 
-      {status === "error" && (
-        <p className="text-sm text-red-600">Something went wrong. Please try again.</p>
-      )}
+      {status === "error" && <p className="text-sm text-red-600">{dict.contact.error}</p>}
 
       <button
         type="submit"
         disabled={isSubmitting}
         className="mt-2 inline-flex items-center justify-center rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-700 disabled:opacity-60"
       >
-        {isSubmitting ? "Sending..." : "Send message"}
+        {isSubmitting ? dict.contact.sending : dict.contact.send}
       </button>
     </form>
   );

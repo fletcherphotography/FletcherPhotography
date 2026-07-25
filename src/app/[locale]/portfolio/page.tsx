@@ -4,23 +4,41 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { CTASection } from "@/components/CTASection";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn";
-import { portfolioCategories } from "@/content/portfolio";
+import { getPortfolioCategories } from "@/content/portfolio";
+import { locales, resolveLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
-export const metadata: Metadata = {
-  title: "Portfolio",
-  description:
-    "Browse photography by category: Business & Events, Personal Branding, and Portraits & Love Stories.",
-};
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
-export default function PortfolioPage() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const locale = resolveLocale((await params).locale);
+  const dict = getDictionary(locale);
+  return { title: dict.portfolio.title, description: dict.portfolio.subtitle };
+}
+
+export default async function PortfolioPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = resolveLocale((await params).locale);
+  const dict = getDictionary(locale);
+  const portfolioCategories = getPortfolioCategories(locale);
+
   return (
     <>
       <Section className="pt-20 sm:pt-28">
         <FadeIn>
           <SectionHeading
-            eyebrow="Portfolio"
-            title="Work, organised by what you need it for"
-            subtitle="Explore photography across three categories — business and events, personal branding, and portraits and love stories."
+            eyebrow={dict.portfolio.eyebrow}
+            title={dict.portfolio.title}
+            subtitle={dict.portfolio.subtitle}
           />
         </FadeIn>
       </Section>
@@ -29,7 +47,7 @@ export default function PortfolioPage() {
         <FadeInStagger className="grid gap-8 sm:grid-cols-3">
           {portfolioCategories.map((category) => (
             <FadeInStaggerItem key={category.slug}>
-              <Link href={`/portfolio/${category.slug}`} className="group block">
+              <Link href={`/${locale}/portfolio/${category.slug}`} className="group block">
                 <div className="overflow-hidden rounded-md">
                   <PlaceholderImage
                     label={category.title}
@@ -49,9 +67,9 @@ export default function PortfolioPage() {
       <Section>
         <FadeIn>
           <CTASection
-            title="Let's work together"
-            text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
-            ctaLabel="Contact via WhatsApp"
+            title={dict.common.letsWorkTogetherTitle}
+            text={dict.common.letsWorkTogetherText}
+            ctaLabel={dict.common.contactWhatsApp}
           />
         </FadeIn>
       </Section>

@@ -3,13 +3,27 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { CTASection } from "@/components/CTASection";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn";
+import { locales, resolveLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: "The person and approach behind the camera.",
-};
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
-export default function AboutPage() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const locale = resolveLocale((await params).locale);
+  const dict = getDictionary(locale);
+  return { title: dict.about.heading, description: dict.about.intro1 };
+}
+
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = resolveLocale((await params).locale);
+  const dict = getDictionary(locale);
+
   return (
     <>
       <Section className="pt-20 sm:pt-28">
@@ -17,34 +31,23 @@ export default function AboutPage() {
           <PlaceholderImage label="Portrait" className="aspect-[4/5] w-full" />
           <div>
             <h1 className="text-3xl font-light tracking-tight text-neutral-900 sm:text-4xl">
-              Hi, I&apos;m Anna
+              {dict.about.heading}
             </h1>
-            <p className="mt-6 text-base leading-relaxed text-neutral-600">
-              I started photography because I love the moment someone stops performing for the
-              camera and just becomes themselves. That&apos;s the moment I&apos;m always working towards —
-              whether it&apos;s a business headshot, a couple&apos;s engagement session, or a company event.
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-neutral-600">
-              My approach is simple: clear direction, genuine conversation, and enough patience to
-              let real expressions happen. You don&apos;t need modelling experience — you just need to
-              show up.
-            </p>
+            <p className="mt-6 text-base leading-relaxed text-neutral-600">{dict.about.intro1}</p>
+            <p className="mt-4 text-base leading-relaxed text-neutral-600">{dict.about.intro2}</p>
           </div>
         </FadeIn>
       </Section>
 
       <Section className="bg-neutral-50">
         <FadeIn>
-          <SectionHeading
-            title="Behind the camera"
-            subtitle="I keep sessions relaxed and well-organised — from the first message, through a preparation call with outfit and posing guidance, to a supported, unhurried shoot."
-          />
+          <SectionHeading title={dict.about.behindTitle} subtitle={dict.about.behindSubtitle} />
         </FadeIn>
       </Section>
 
       <Section>
         <FadeIn>
-          <SectionHeading title="A few moments from recent sessions" />
+          <SectionHeading title={dict.about.momentsTitle} />
         </FadeIn>
         <FadeInStagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-5">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -63,9 +66,9 @@ export default function AboutPage() {
       <Section>
         <FadeIn>
           <CTASection
-            title="Let's work together"
-            text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
-            ctaLabel="Contact via WhatsApp"
+            title={dict.common.letsWorkTogetherTitle}
+            text={dict.common.letsWorkTogetherText}
+            ctaLabel={dict.common.contactWhatsApp}
           />
         </FadeIn>
       </Section>

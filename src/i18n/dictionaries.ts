@@ -1,0 +1,256 @@
+import { Locale } from "./config";
+
+export type Dictionary = {
+  nav: {
+    home: string;
+    portfolio: string;
+    services: string;
+    about: string;
+    reviews: string;
+    contact: string;
+    booking: string;
+  };
+  common: {
+    viewPortfolio: string;
+    getInTouch: string;
+    letsWorkTogetherTitle: string;
+    letsWorkTogetherText: string;
+    contactWhatsApp: string;
+  };
+  home: {
+    heroEyebrow: string;
+    heroTitle: string;
+    heroText: string;
+    introTitle1: string;
+    introText1: string;
+    introTitle2: string;
+    introText2: string;
+    testimonialsTitle: string;
+    processEyebrow: string;
+    processTitle: string;
+    brandsTitle: string;
+    faqTitle: string;
+  };
+  portfolio: { eyebrow: string; title: string; subtitle: string };
+  services: { eyebrow: string; title: string; subtitle: string };
+  about: {
+    heading: string;
+    intro1: string;
+    intro2: string;
+    behindTitle: string;
+    behindSubtitle: string;
+    momentsTitle: string;
+  };
+  reviews: { eyebrow: string; title: string; subtitle: string };
+  contact: {
+    title: string;
+    subtitle: string;
+    fullName: string;
+    email: string;
+    phone: string;
+    phoneOptional: string;
+    message: string;
+    consent: string;
+    privacyPolicy: string;
+    send: string;
+    sending: string;
+    success: string;
+    error: string;
+  };
+  booking: { eyebrow: string; title: string; subtitle: string; calNote: string };
+  footer: { whatsapp: string; email: string; instagram: string; contact: string };
+};
+
+export const dictionaries: Record<Locale, Dictionary> = {
+  en: {
+    nav: {
+      home: "Home",
+      portfolio: "Portfolio",
+      services: "Services",
+      about: "About",
+      reviews: "Reviews",
+      contact: "Contact",
+      booking: "Booking",
+    },
+    common: {
+      viewPortfolio: "View portfolio",
+      getInTouch: "Get in touch",
+      letsWorkTogetherTitle: "Let's work together",
+      letsWorkTogetherText:
+        "Tell me what you are planning, and let's create images with presence, purpose and real feeling.",
+      contactWhatsApp: "Contact via WhatsApp",
+    },
+    home: {
+      heroEyebrow: "Photography in Switzerland",
+      heroTitle: "Images with presence, purpose and real feeling.",
+      heroText:
+        "Relaxed, natural photography for businesses, personal branding and portraits — created for the moments that matter.",
+      introTitle1: "You feel at ease during the shoot",
+      introText1:
+        "Clear, relaxed direction helps you look natural and confident, without feeling overly posed.",
+      introTitle2: "You receive images with purpose",
+      introText2:
+        "Photography created for your website, social media, marketing, press, team communication or a meaningful personal memory.",
+      testimonialsTitle: "Kind words and the faces behind them",
+      processEyebrow: "Process",
+      processTitle: "Simple from first message to final gallery",
+      brandsTitle: "Trusted by Brands and Organisations Across Switzerland",
+      faqTitle: "Frequently Asked Questions",
+    },
+    portfolio: {
+      eyebrow: "Portfolio",
+      title: "Work, organised by what you need it for",
+      subtitle:
+        "Explore photography across three categories — business and events, personal branding, and portraits and love stories.",
+    },
+    services: {
+      eyebrow: "Services",
+      title: "Photography for every kind of story",
+      subtitle:
+        "Clear, structured sessions with no overwhelming price lists — get in touch for a quote tailored to you.",
+    },
+    about: {
+      heading: "Hi, I'm Anna",
+      intro1:
+        "I started photography because I love the moment someone stops performing for the camera and just becomes themselves. That's the moment I'm always working towards — whether it's a business headshot, a couple's engagement session, or a company event.",
+      intro2:
+        "My approach is simple: clear direction, genuine conversation, and enough patience to let real expressions happen. You don't need modelling experience — you just need to show up.",
+      behindTitle: "Behind the camera",
+      behindSubtitle:
+        "I keep sessions relaxed and well-organised — from the first message, through a preparation call with outfit and posing guidance, to a supported, unhurried shoot.",
+      momentsTitle: "A few moments from recent sessions",
+    },
+    reviews: {
+      eyebrow: "Reviews",
+      title: "What clients say",
+      subtitle: "A few words from the people I've had the pleasure of photographing.",
+    },
+    contact: {
+      title: "Let's plan your shoot.",
+      subtitle:
+        "Tell me a little about what you have in mind, and I'll get back to you with the next steps.",
+      fullName: "Full name",
+      email: "Email",
+      phone: "Phone number",
+      phoneOptional: "(optional)",
+      message: "Tell me about your idea",
+      consent: "I agree to the",
+      privacyPolicy: "Privacy Policy",
+      send: "Send message",
+      sending: "Sending...",
+      success: "Thank you your message is on its way. I'll get back to you as soon as possible.",
+      error: "Something went wrong. Please try again.",
+    },
+    booking: {
+      eyebrow: "Booking",
+      title: "Book your session",
+      subtitle:
+        "Pick a time that works for you — the call is a short, no-pressure chat about your idea, timing and location.",
+      calNote: "If the calendar doesn't load, you can also reach out via WhatsApp or the contact form.",
+    },
+    footer: {
+      whatsapp: "WhatsApp",
+      email: "Email",
+      instagram: "Instagram",
+      contact: "Contact",
+    },
+  },
+  de: {
+    nav: {
+      home: "Home",
+      portfolio: "Portfolio",
+      services: "Leistungen",
+      about: "Über mich",
+      reviews: "Bewertungen",
+      contact: "Kontakt",
+      booking: "Termin buchen",
+    },
+    common: {
+      viewPortfolio: "Portfolio ansehen",
+      getInTouch: "Kontakt aufnehmen",
+      letsWorkTogetherTitle: "Lass uns zusammenarbeiten",
+      letsWorkTogetherText:
+        "Erzähl mir, was du vorhast, und lass uns Bilder mit Präsenz, Zweck und echtem Gefühl schaffen.",
+      contactWhatsApp: "Per WhatsApp kontaktieren",
+    },
+    home: {
+      heroEyebrow: "Fotografie in der Schweiz",
+      heroTitle: "Bilder mit Präsenz, Zweck und echtem Gefühl.",
+      heroText:
+        "Entspannte, natürliche Fotografie für Unternehmen, Personal Branding und Portraits — für die Momente, die zählen.",
+      introTitle1: "Du fühlst dich beim Shooting wohl",
+      introText1:
+        "Klare, entspannte Anleitung hilft dir, natürlich und selbstbewusst zu wirken, ohne dich gestellt zu fühlen.",
+      introTitle2: "Du erhältst Bilder mit Zweck",
+      introText2:
+        "Fotografie für deine Website, Social Media, Marketing, Presse, interne Kommunikation oder eine bedeutungsvolle persönliche Erinnerung.",
+      testimonialsTitle: "Nette Worte und die Gesichter dahinter",
+      processEyebrow: "Ablauf",
+      processTitle: "Einfach von der ersten Nachricht bis zur fertigen Galerie",
+      brandsTitle: "Vertraut von Marken und Organisationen in der ganzen Schweiz",
+      faqTitle: "Häufig gestellte Fragen",
+    },
+    portfolio: {
+      eyebrow: "Portfolio",
+      title: "Arbeiten, geordnet nach deinem Bedarf",
+      subtitle:
+        "Entdecke Fotografie in drei Kategorien — Business & Events, Personal Branding sowie Portraits & Love Stories.",
+    },
+    services: {
+      eyebrow: "Leistungen",
+      title: "Fotografie für jede Art von Geschichte",
+      subtitle:
+        "Klare, strukturierte Sessions ohne überladene Preislisten — melde dich für ein individuelles Angebot.",
+    },
+    about: {
+      heading: "Hallo, ich bin Anna",
+      intro1:
+        "Ich habe mit der Fotografie angefangen, weil ich den Moment liebe, in dem jemand aufhört, für die Kamera zu posieren, und einfach er selbst wird. Genau darauf arbeite ich immer hin — ob Business-Headshot, Verlobungsshooting oder Firmenevent.",
+      intro2:
+        "Mein Ansatz ist einfach: klare Anleitung, ehrliches Gespräch und genug Geduld, damit echte Ausdrücke entstehen können. Du brauchst keine Modelerfahrung — du musst nur da sein.",
+      behindTitle: "Hinter der Kamera",
+      behindSubtitle:
+        "Ich halte Sessions entspannt und gut organisiert — von der ersten Nachricht über ein Vorgespräch mit Outfit- und Posing-Tipps bis zu einem begleiteten, entspannten Shooting.",
+      momentsTitle: "Ein paar Momente aus letzten Sessions",
+    },
+    reviews: {
+      eyebrow: "Bewertungen",
+      title: "Das sagen Kund:innen",
+      subtitle: "Ein paar Worte von Menschen, die ich fotografieren durfte.",
+    },
+    contact: {
+      title: "Lass uns dein Shooting planen.",
+      subtitle:
+        "Erzähl mir kurz, was du vorhast, und ich melde mich mit den nächsten Schritten zurück.",
+      fullName: "Vollständiger Name",
+      email: "E-Mail",
+      phone: "Telefonnummer",
+      phoneOptional: "(optional)",
+      message: "Erzähl mir von deiner Idee",
+      consent: "Ich stimme der",
+      privacyPolicy: "Datenschutzerklärung",
+      send: "Nachricht senden",
+      sending: "Wird gesendet...",
+      success: "Danke, deine Nachricht ist unterwegs. Ich melde mich so schnell wie möglich.",
+      error: "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    },
+    booking: {
+      eyebrow: "Termin buchen",
+      title: "Buche deine Session",
+      subtitle:
+        "Wähle einen passenden Termin — das Gespräch ist ein kurzer, unverbindlicher Austausch über deine Idee, Timing und Location.",
+      calNote:
+        "Falls der Kalender nicht lädt, kannst du mich auch per WhatsApp oder über das Kontaktformular erreichen.",
+    },
+    footer: {
+      whatsapp: "WhatsApp",
+      email: "E-Mail",
+      instagram: "Instagram",
+      contact: "Kontakt",
+    },
+  },
+};
+
+export function getDictionary(locale: Locale): Dictionary {
+  return dictionaries[locale];
+}

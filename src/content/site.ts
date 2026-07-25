@@ -4,14 +4,7 @@ export const site = {
   email: "hello@annafletcher.example", // TODO: replace with real email
   instagram: "https://instagram.com/annafletcher.photo", // TODO: replace with real profile
   location: "Switzerland",
-  nav: [
-    { label: "Home", href: "/" },
-    { label: "Portfolio", href: "/portfolio" },
-    { label: "Services", href: "/services" },
-    { label: "About", href: "/about" },
-    { label: "Reviews", href: "/reviews" },
-    { label: "Contact", href: "/contact" },
-  ],
+  calcomUsername: "your-username", // TODO: replace with the real Cal.com username/event slug
 };
 
 export function whatsappHref(message?: string) {

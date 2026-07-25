@@ -6,18 +6,23 @@ import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { CTASection } from "@/components/CTASection";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn";
 import { getAllCategoryParams, getCategory } from "@/content/portfolio";
+import { locales, resolveLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
 export function generateStaticParams() {
-  return getAllCategoryParams();
+  return locales.flatMap((locale) =>
+    getAllCategoryParams().map((p) => ({ locale, ...p }))
+  );
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ category: string }>;
+  params: Promise<{ locale: string; category: string }>;
 }): Promise<Metadata> {
-  const { category: categorySlug } = await params;
-  const category = getCategory(categorySlug);
+  const raw = await params;
+  const locale = resolveLocale(raw.locale);
+  const category = getCategory(locale, raw.category);
   if (!category) return {};
   return { title: category.title, description: category.description };
 }
@@ -25,17 +30,24 @@ export async function generateMetadata({
 export default async function CategoryPage({
   params,
 }: {
-  params: Promise<{ category: string }>;
+  params: Promise<{ locale: string; category: string }>;
 }) {
-  const { category: categorySlug } = await params;
-  const category = getCategory(categorySlug);
+  const raw = await params;
+  const locale = resolveLocale(raw.locale);
+  const categorySlug = raw.category;
+  const dict = getDictionary(locale);
+  const category = getCategory(locale, categorySlug);
   if (!category) notFound();
 
   return (
     <>
       <Section className="pt-20 sm:pt-28">
         <FadeIn>
-          <SectionHeading eyebrow="Portfolio" title={category.title} subtitle={category.description} />
+          <SectionHeading
+            eyebrow={dict.portfolio.eyebrow}
+            title={category.title}
+            subtitle={category.description}
+          />
         </FadeIn>
       </Section>
 
@@ -43,7 +55,7 @@ export default async function CategoryPage({
         <FadeInStagger className="grid gap-8 sm:grid-cols-3">
           {category.subcategories.map((sub) => (
             <FadeInStaggerItem key={sub.slug}>
-              <Link href={`/portfolio/${category.slug}/${sub.slug}`} className="group block">
+              <Link href={`/${locale}/portfolio/${category.slug}/${sub.slug}`} className="group block">
                 <div className="overflow-hidden rounded-md">
                   <PlaceholderImage
                     label={sub.title}
@@ -62,9 +74,9 @@ export default async function CategoryPage({
       <Section>
         <FadeIn>
           <CTASection
-            title="Let's work together"
-            text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
-            ctaLabel="Contact via WhatsApp"
+            title={dict.common.letsWorkTogetherTitle}
+            text={dict.common.letsWorkTogetherText}
+            ctaLabel={dict.common.contactWhatsApp}
           />
         </FadeIn>
       </Section>
