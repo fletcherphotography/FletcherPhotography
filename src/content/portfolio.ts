@@ -17,6 +17,7 @@ export type Category = {
   slug: string;
   title: string;
   description: string;
+  intro: string;
   subcategories: Subcategory[];
 };
 
@@ -31,6 +32,7 @@ type RawCategory = {
   slug: string;
   title: Record<Locale, string>;
   description: Record<Locale, string>;
+  intro: Record<Locale, string>;
   subcategories: RawSubcategory[];
 };
 
@@ -41,6 +43,10 @@ const rawPortfolioCategories: RawCategory[] = [
     description: {
       en: "Confident, natural photography for teams, headshots and company events across Switzerland.",
       de: "Selbstbewusste, natürliche Fotografie für Teams, Headshots und Firmenevents in der ganzen Schweiz.",
+    },
+    intro: {
+      en: "First impressions matter — for individual profiles and for how your whole company is perceived. Consistent, professional imagery across headshots, team photos and event coverage builds trust with clients, partners and candidates before they ever meet you in person. The result is a coherent visual identity you can reuse across your website, LinkedIn, press and internal communication, without a new photoshoot every time you need an image.",
+      de: "Der erste Eindruck zählt — für einzelne Profile und für das Bild deines gesamten Unternehmens. Konsistente, professionelle Bilder bei Headshots, Team-Fotos und Event-Coverage schaffen Vertrauen bei Kund:innen, Partner:innen und Bewerber:innen, noch bevor sie dich persönlich treffen. Das Ergebnis ist eine stimmige visuelle Identität, die du auf Website, LinkedIn, in der Presse und intern wiederverwenden kannst — ohne für jedes Bild ein neues Shooting zu brauchen.",
     },
     subcategories: [
       {
@@ -79,6 +85,10 @@ const rawPortfolioCategories: RawCategory[] = [
       en: "Natural, professional content for founders, consultants and creatives to use across web, LinkedIn and social media.",
       de: "Natürlicher, professioneller Content für Gründer:innen, Berater:innen und Kreative — für Web, LinkedIn und Social Media.",
     },
+    intro: {
+      en: "As a founder, consultant or expert, you are the brand — but most people don't have a natural library of images that actually look like them. A personal branding session solves that in one sitting: relaxed direction produces a full set of natural, professional photos for your website, LinkedIn, pitch decks and PR, so you stop reusing the same outdated headshot everywhere and start showing up consistently online.",
+      de: "Als Gründer:in, Berater:in oder Expert:in bist du die Marke — trotzdem fehlt den meisten eine natürliche Bildbibliothek, die wirklich nach ihnen aussieht. Eine Personal-Branding-Session löst das in einer Sitzung: entspannte Anleitung liefert ein volles Set natürlicher, professioneller Fotos für Website, LinkedIn, Pitch-Decks und PR — damit du nicht überall dasselbe veraltete Headshot wiederverwendest, sondern online konsistent auftrittst.",
+    },
     subcategories: [
       {
         slug: "founders-entrepreneurs",
@@ -115,6 +125,10 @@ const rawPortfolioCategories: RawCategory[] = [
     description: {
       en: "Relaxed, honest photography for individual portraits, couples and lifestyle moments you'll want to keep.",
       de: "Entspannte, ehrliche Fotografie für Einzelportraits, Paare und Lifestyle-Momente, die du behalten möchtest.",
+    },
+    intro: {
+      en: "Some moments are worth more than a phone snapshot — a relationship, a milestone, or simply how you look and feel right now. These sessions are built around real connection rather than stiff posing, so the direction stays light and conversational throughout. The result is a set of honest, warm images you'll actually want to print, share and look back on for years, not just store on a hard drive.",
+      de: "Manche Momente sind mehr wert als ein Handyfoto — eine Beziehung, ein Meilenstein, oder einfach wie du dich gerade fühlst. Diese Sessions bauen auf echter Verbindung statt steifem Posieren auf, die Anleitung bleibt leicht und im Gespräch. Das Ergebnis ist ein Set ehrlicher, warmer Bilder, die du wirklich drucken, teilen und jahrelang gerne ansehen möchtest — nicht nur auf einer Festplatte lagerst.",
     },
     subcategories: [
       {
@@ -162,6 +176,7 @@ function localizeCategory(category: RawCategory, locale: Locale): Category {
     slug: category.slug,
     title: category.title[locale],
     description: category.description[locale],
+    intro: category.intro[locale],
     subcategories: category.subcategories.map((s) => localizeSubcategory(s, locale)),
   };
 }

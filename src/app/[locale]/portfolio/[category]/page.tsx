@@ -41,13 +41,14 @@ export default async function CategoryPage({
 
   return (
     <>
-      <Section className="pt-20 sm:pt-28">
+      <Section className="pt-20 sm:pt-28" containerClassName="max-w-3xl">
         <FadeIn>
           <SectionHeading
             eyebrow={dict.portfolio.eyebrow}
             title={category.title}
             subtitle={category.description}
           />
+          <p className="mt-6 text-base leading-relaxed text-neutral-600">{category.intro}</p>
         </FadeIn>
       </Section>
 
