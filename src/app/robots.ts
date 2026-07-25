@@ -1,0 +1,8 @@
+import { MetadataRoute } from "next";
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: { userAgent: "*", allow: "/" },
+    sitemap: "https://www.example.com/sitemap.xml", // TODO: replace with real production domain
+  };
+}
