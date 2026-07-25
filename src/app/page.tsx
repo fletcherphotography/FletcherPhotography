@@ -1,4 +1,5 @@
 import { Section, SectionHeading } from "@/components/ui/Section";
+import { Hero } from "@/components/Hero";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { ProcessStepCard } from "@/components/ProcessStep";
 import { LogoStrip } from "@/components/LogoStrip";
@@ -14,6 +15,8 @@ import { faqItems } from "@/content/faq";
 export default function Home() {
   return (
     <>
+      <Hero />
+
       {/* Intro */}
       <Section className="pt-20 sm:pt-28">
         <FadeIn>
