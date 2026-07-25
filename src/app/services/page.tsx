@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/CTASection";
+import { FadeIn } from "@/components/ui/FadeIn";
 import { serviceGroups, pricingNote } from "@/content/services";
 
 export const metadata: Metadata = {
@@ -14,16 +15,18 @@ export default function ServicesPage() {
   return (
     <>
       <Section className="pt-20 sm:pt-28">
-        <SectionHeading
-          eyebrow="Services"
-          title="Photography for every kind of story"
-          subtitle="Clear, structured sessions with no overwhelming price lists — get in touch for a quote tailored to you."
-        />
+        <FadeIn>
+          <SectionHeading
+            eyebrow="Services"
+            title="Photography for every kind of story"
+            subtitle="Clear, structured sessions with no overwhelming price lists — get in touch for a quote tailored to you."
+          />
+        </FadeIn>
       </Section>
 
       {serviceGroups.map((group, i) => (
         <Section key={group.slug} className={i % 2 === 1 ? "bg-neutral-50" : undefined}>
-          <div className="grid gap-10 sm:grid-cols-2 sm:gap-16">
+          <FadeIn className="grid gap-10 sm:grid-cols-2 sm:gap-16">
             <div>
               <h2 className="text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
                 {group.title}
@@ -42,21 +45,25 @@ export default function ServicesPage() {
                 ))}
               </ul>
             )}
-          </div>
+          </FadeIn>
         </Section>
       ))}
 
       <Section containerClassName="max-w-2xl text-center">
-        <p className="text-lg font-medium text-neutral-900">{pricingNote.startingFrom}</p>
-        <p className="mt-3 text-sm text-neutral-600">{pricingNote.detail}</p>
+        <FadeIn>
+          <p className="text-lg font-medium text-neutral-900">{pricingNote.startingFrom}</p>
+          <p className="mt-3 text-sm text-neutral-600">{pricingNote.detail}</p>
+        </FadeIn>
       </Section>
 
       <Section>
-        <CTASection
-          title="Let's work together"
-          text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
-          ctaLabel="Contact via WhatsApp"
-        />
+        <FadeIn>
+          <CTASection
+            title="Let's work together"
+            text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
+            ctaLabel="Contact via WhatsApp"
+          />
+        </FadeIn>
       </Section>
     </>
   );

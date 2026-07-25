@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { CTASection } from "@/components/CTASection";
+import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn";
 import { getAllCategoryParams, getCategory } from "@/content/portfolio";
 
 export function generateStaticParams() {
@@ -33,28 +34,39 @@ export default async function CategoryPage({
   return (
     <>
       <Section className="pt-20 sm:pt-28">
-        <SectionHeading eyebrow="Portfolio" title={category.title} subtitle={category.description} />
+        <FadeIn>
+          <SectionHeading eyebrow="Portfolio" title={category.title} subtitle={category.description} />
+        </FadeIn>
       </Section>
 
       <Section className="pt-0">
-        <div className="grid gap-8 sm:grid-cols-3">
+        <FadeInStagger className="grid gap-8 sm:grid-cols-3">
           {category.subcategories.map((sub) => (
-            <Link key={sub.slug} href={`/portfolio/${category.slug}/${sub.slug}`} className="group">
-              <PlaceholderImage label={sub.title} className="aspect-[4/5] w-full" />
-              <h3 className="mt-4 text-lg font-medium text-neutral-900 group-hover:underline">
-                {sub.title}
-              </h3>
-            </Link>
+            <FadeInStaggerItem key={sub.slug}>
+              <Link href={`/portfolio/${category.slug}/${sub.slug}`} className="group block">
+                <div className="overflow-hidden rounded-md">
+                  <PlaceholderImage
+                    label={sub.title}
+                    className="aspect-[4/5] w-full transition-transform duration-500 ease-out group-hover:scale-105"
+                  />
+                </div>
+                <h3 className="mt-4 text-lg font-medium text-neutral-900 group-hover:underline">
+                  {sub.title}
+                </h3>
+              </Link>
+            </FadeInStaggerItem>
           ))}
-        </div>
+        </FadeInStagger>
       </Section>
 
       <Section>
-        <CTASection
-          title="Let's work together"
-          text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
-          ctaLabel="Contact via WhatsApp"
-        />
+        <FadeIn>
+          <CTASection
+            title="Let's work together"
+            text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
+            ctaLabel="Contact via WhatsApp"
+          />
+        </FadeIn>
       </Section>
     </>
   );

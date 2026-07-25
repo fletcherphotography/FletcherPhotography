@@ -12,7 +12,7 @@ type ButtonProps = {
 
 export function Button({ href, children, variant = "primary", className, external }: ButtonProps) {
   const classes = clsx(
-    "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition-colors",
+    "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0",
     variant === "primary"
       ? "bg-neutral-900 text-white hover:bg-neutral-700"
       : "border border-neutral-300 text-neutral-900 hover:border-neutral-900",

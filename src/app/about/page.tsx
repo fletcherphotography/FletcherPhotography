@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { CTASection } from "@/components/CTASection";
+import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn";
 
 export const metadata: Metadata = {
   title: "About",
@@ -12,7 +13,7 @@ export default function AboutPage() {
   return (
     <>
       <Section className="pt-20 sm:pt-28">
-        <div className="grid gap-10 sm:grid-cols-2 sm:gap-16">
+        <FadeIn className="grid gap-10 sm:grid-cols-2 sm:gap-16">
           <PlaceholderImage label="Portrait" className="aspect-[4/5] w-full" />
           <div>
             <h1 className="text-3xl font-light tracking-tight text-neutral-900 sm:text-4xl">
@@ -29,31 +30,44 @@ export default function AboutPage() {
               show up.
             </p>
           </div>
-        </div>
+        </FadeIn>
       </Section>
 
       <Section className="bg-neutral-50">
-        <SectionHeading
-          title="Behind the camera"
-          subtitle="I keep sessions relaxed and well-organised — from the first message, through a preparation call with outfit and posing guidance, to a supported, unhurried shoot."
-        />
+        <FadeIn>
+          <SectionHeading
+            title="Behind the camera"
+            subtitle="I keep sessions relaxed and well-organised — from the first message, through a preparation call with outfit and posing guidance, to a supported, unhurried shoot."
+          />
+        </FadeIn>
       </Section>
 
       <Section>
-        <SectionHeading title="A few moments from recent sessions" />
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-5">
+        <FadeIn>
+          <SectionHeading title="A few moments from recent sessions" />
+        </FadeIn>
+        <FadeInStagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-5">
           {Array.from({ length: 5 }).map((_, i) => (
-            <PlaceholderImage key={i} label={`Behind the scenes ${i + 1}`} className="aspect-[4/5] w-full" />
+            <FadeInStaggerItem key={i}>
+              <div className="overflow-hidden rounded-md">
+                <PlaceholderImage
+                  label={`Behind the scenes ${i + 1}`}
+                  className="aspect-[4/5] w-full transition-transform duration-500 ease-out hover:scale-105"
+                />
+              </div>
+            </FadeInStaggerItem>
           ))}
-        </div>
+        </FadeInStagger>
       </Section>
 
       <Section>
-        <CTASection
-          title="Let's work together"
-          text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
-          ctaLabel="Contact via WhatsApp"
-        />
+        <FadeIn>
+          <CTASection
+            title="Let's work together"
+            text="Tell me what you are planning, and let's create images with presence, purpose and real feeling."
+            ctaLabel="Contact via WhatsApp"
+          />
+        </FadeIn>
       </Section>
     </>
   );

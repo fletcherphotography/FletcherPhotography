@@ -6,7 +6,7 @@ export function LogoStrip({ logos }: { logos: BrandLogo[] }) {
       {logos.map((logo) => (
         <div
           key={logo.id}
-          className="flex h-12 items-center justify-center text-sm font-medium tracking-wide text-neutral-400"
+          className="flex h-12 items-center justify-center text-sm font-medium tracking-wide text-neutral-400 grayscale transition-all duration-300 hover:text-neutral-700 hover:grayscale-0"
         >
           {logo.name}
         </div>
