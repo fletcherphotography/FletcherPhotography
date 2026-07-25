@@ -16,7 +16,6 @@ function navItems(locale: Locale) {
     { label: dict.nav.services, href: `/${locale}/services` },
     { label: dict.nav.about, href: `/${locale}/about` },
     { label: dict.nav.reviews, href: `/${locale}/reviews` },
-    { label: dict.nav.booking, href: `/${locale}/booking` },
     { label: dict.nav.contact, href: `/${locale}/contact` },
   ];
 }
@@ -31,9 +30,11 @@ export function Header({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const items = navItems(locale);
+  const dict = getDictionary(locale);
+  const bookingHref = `/${locale}/booking`;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-100 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-neutral-200 bg-neutral-50/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-8">
         <Link href={`/${locale}`} className="text-base font-medium tracking-tight text-neutral-900">
           {site.name}
@@ -49,7 +50,7 @@ export function Header({ locale }: { locale: Locale }) {
               {item.label}
             </Link>
           ))}
-          <div className="ml-2 flex items-center gap-1 border-l border-neutral-200 pl-4 text-xs font-medium uppercase tracking-wide text-neutral-400">
+          <div className="flex items-center gap-1 border-l border-neutral-200 pl-4 text-xs font-medium uppercase tracking-wide text-neutral-400">
             {locales.map((loc) => (
               <Link
                 key={loc}
@@ -63,12 +64,18 @@ export function Header({ locale }: { locale: Locale }) {
               </Link>
             ))}
           </div>
+          <Link
+            href={bookingHref}
+            className="rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-neutral-700"
+          >
+            {dict.common.bookNow}
+          </Link>
         </nav>
 
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 md:hidden"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-300 md:hidden"
           aria-label="Toggle menu"
           aria-expanded={open}
         >
@@ -82,7 +89,7 @@ export function Header({ locale }: { locale: Locale }) {
 
       <nav
         className={clsx(
-          "grid overflow-hidden border-t border-neutral-100 bg-white transition-[grid-template-rows] duration-200 md:hidden",
+          "grid overflow-hidden border-t border-neutral-200 bg-neutral-50 transition-[grid-template-rows] duration-200 md:hidden",
           open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         )}
       >
@@ -98,7 +105,14 @@ export function Header({ locale }: { locale: Locale }) {
                 {item.label}
               </Link>
             ))}
-            <div className="mt-2 flex gap-3 border-t border-neutral-100 pt-3 text-xs font-medium uppercase tracking-wide text-neutral-400">
+            <Link
+              href={bookingHref}
+              onClick={() => setOpen(false)}
+              className="mt-2 inline-flex items-center justify-center rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white"
+            >
+              {dict.common.bookNow}
+            </Link>
+            <div className="mt-3 flex gap-3 border-t border-neutral-200 pt-3 text-xs font-medium uppercase tracking-wide text-neutral-400">
               {locales.map((loc) => (
                 <Link
                   key={loc}

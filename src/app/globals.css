@@ -1,8 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #1a1a1a;
+  --background: #fdfbf7;
+  --foreground: #2e2620;
+}
+
+/* Warm beige override of Tailwind's default neutral scale — every
+   bg/text/border-neutral-* utility picks this up automatically. */
+@theme {
+  --color-neutral-50: #f5eee1;
+  --color-neutral-100: #f3ece1;
+  --color-neutral-200: #e7dcc8;
+  --color-neutral-300: #d7c5a3;
+  --color-neutral-400: #bfa87c;
+  --color-neutral-500: #a48a5e;
+  --color-neutral-600: #8a7048;
+  --color-neutral-700: #6b5638;
+  --color-neutral-800: #4a3c28;
+  --color-neutral-900: #322921;
 }
 
 @theme inline {

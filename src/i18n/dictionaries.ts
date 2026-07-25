@@ -16,6 +16,7 @@ export type Dictionary = {
     letsWorkTogetherTitle: string;
     letsWorkTogetherText: string;
     contactWhatsApp: string;
+    bookNow: string;
   };
   home: {
     heroEyebrow: string;
@@ -79,6 +80,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       letsWorkTogetherText:
         "Tell me what you are planning, and let's create images with presence, purpose and real feeling.",
       contactWhatsApp: "Contact via WhatsApp",
+      bookNow: "Book Now",
     },
     home: {
       heroEyebrow: "Photography in Switzerland",
@@ -172,6 +174,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       letsWorkTogetherText:
         "Erzähl mir, was du vorhast, und lass uns Bilder mit Präsenz, Zweck und echtem Gefühl schaffen.",
       contactWhatsApp: "Per WhatsApp kontaktieren",
+      bookNow: "Jetzt buchen",
     },
     home: {
       heroEyebrow: "Fotografie in der Schweiz",

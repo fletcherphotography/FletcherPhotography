@@ -8,7 +8,7 @@ export function Footer({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
 
   return (
-    <footer className="border-t border-neutral-100 bg-white">
+    <footer className="border-t border-neutral-200 bg-neutral-50">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-12 text-sm text-neutral-500 sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <p>
           &copy; {new Date().getFullYear()} {site.name}. {site.location}.
