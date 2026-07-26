@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import clsx from "clsx";
 import { site } from "@/content/site";
 import { Locale, locales } from "@/i18n/config";
@@ -45,9 +46,10 @@ export function Header({ locale }: { locale: Locale }) {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm text-neutral-600 transition-colors hover:text-neutral-900"
+              className="group relative text-sm text-neutral-600 transition-colors hover:text-neutral-900"
             >
               {item.label}
+              <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-neutral-900 transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </Link>
           ))}
           <div className="flex items-center gap-1 border-l border-neutral-200 pl-4 text-xs font-medium uppercase tracking-wide text-neutral-400">
@@ -64,12 +66,14 @@ export function Header({ locale }: { locale: Locale }) {
               </Link>
             ))}
           </div>
-          <Link
-            href={bookingHref}
-            className="rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-neutral-700"
-          >
-            {dict.common.bookNow}
-          </Link>
+          <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }}>
+            <Link
+              href={bookingHref}
+              className="rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-neutral-700"
+            >
+              {dict.common.bookNow}
+            </Link>
+          </motion.div>
         </nav>
 
         <button
