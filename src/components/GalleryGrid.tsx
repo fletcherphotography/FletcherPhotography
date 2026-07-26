@@ -8,6 +8,8 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
         <div key={photo.id} className="overflow-hidden rounded-md">
           <PlaceholderImage
             label={photo.alt}
+            src={photo.src}
+            alt={photo.alt}
             className="aspect-[4/5] w-full transition-transform duration-500 ease-out hover:scale-105"
           />
         </div>

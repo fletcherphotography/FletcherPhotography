@@ -28,7 +28,11 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     <>
       <Section className="pt-20 sm:pt-28">
         <FadeIn className="grid gap-10 sm:grid-cols-2 sm:gap-16">
-          <PlaceholderImage label="Portrait" className="aspect-[4/5] w-full" />
+          <PlaceholderImage
+            label="Portrait"
+            src="/images/about/portrait.jpg"
+            className="aspect-[4/5] w-full"
+          />
           <div>
             <h1 className="text-3xl font-light tracking-tight text-neutral-900 sm:text-4xl">
               {dict.about.heading}
@@ -55,6 +59,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <div className="overflow-hidden rounded-md">
                 <PlaceholderImage
                   label={`Behind the scenes ${i + 1}`}
+                  src={`/images/about/bts-${i + 1}.jpg`}
                   className="aspect-[4/5] w-full transition-transform duration-500 ease-out hover:scale-105"
                 />
               </div>

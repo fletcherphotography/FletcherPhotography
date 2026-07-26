@@ -60,6 +60,7 @@ export default async function CategoryPage({
                 <div className="overflow-hidden rounded-md">
                   <PlaceholderImage
                     label={sub.title}
+                    src={sub.coverImage}
                     className="aspect-[4/5] w-full transition-transform duration-500 ease-out group-hover:scale-105"
                   />
                 </div>

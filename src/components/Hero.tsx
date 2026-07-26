@@ -50,7 +50,14 @@ export function Hero({ locale }: { locale: Locale }) {
       className="relative flex min-h-[85vh] items-end overflow-hidden sm:min-h-[90vh]"
     >
       <motion.div style={{ y: imageY }} className="absolute inset-0 h-[120%] w-full">
-        <PlaceholderImage label="" rounded="none" dark className="h-full w-full" />
+        <PlaceholderImage
+          label=""
+          src="/images/hero/hero-1.jpg"
+          rounded="none"
+          dark
+          priority
+          className="h-full w-full"
+        />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
 

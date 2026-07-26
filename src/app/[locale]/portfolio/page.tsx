@@ -51,6 +51,7 @@ export default async function PortfolioPage({
                 <div className="overflow-hidden rounded-md">
                   <PlaceholderImage
                     label={category.title}
+                    src={category.coverImage}
                     className="aspect-[4/5] w-full transition-transform duration-500 ease-out group-hover:scale-105"
                   />
                 </div>

@@ -1,7 +1,7 @@
+import Image from "next/image";
 import clsx from "clsx";
 
-// Renders a stylized placeholder until real photography assets are added.
-// Swap for next/image once files exist under /public/images/...
+// Stylized gradient placeholder used until a real photo is supplied via `src`.
 const PALETTES: [string, string][] = [
   ["#f4ede4", "#e4c9b0"],
   ["#eef1ee", "#c9d6cd"],
@@ -22,12 +22,38 @@ export function PlaceholderImage({
   className,
   rounded = false,
   dark = false,
+  src,
+  alt,
+  priority,
 }: {
   label?: string;
   className?: string;
   rounded?: boolean | "none";
   dark?: boolean;
+  src?: string;
+  alt?: string;
+  priority?: boolean;
 }) {
+  const roundedClass = clsx(
+    rounded === true && "rounded-full",
+    rounded === false && "rounded-md"
+  );
+
+  if (src) {
+    return (
+      <div className={clsx("relative overflow-hidden", roundedClass, className)}>
+        <Image
+          src={src}
+          alt={alt ?? label ?? ""}
+          fill
+          priority={priority}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover"
+        />
+      </div>
+    );
+  }
+
   const [from, to] = paletteFor(label ?? "placeholder");
   const [darkFrom, darkTo] = dark ? ["#2b2b28", "#54524a"] : [from, to];
 
@@ -35,8 +61,8 @@ export function PlaceholderImage({
     <div
       className={clsx(
         "relative flex items-end overflow-hidden",
-        rounded === true && "rounded-full items-center justify-center",
-        rounded === false && "rounded-md",
+        rounded === true && "items-center justify-center",
+        roundedClass,
         className
       )}
       style={{ background: `linear-gradient(155deg, ${darkFrom}, ${darkTo})` }}

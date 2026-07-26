@@ -6,6 +6,7 @@ export type Review = Testimonial & { role?: string };
 type RawReview = {
   id: string;
   name: string;
+  photo: string;
   role?: Record<Locale, string>;
   quote: Record<Locale, string>;
 };
@@ -15,6 +16,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r1",
     name: "Sophie M.",
+    photo: "/images/reviews/r1.jpg",
     role: { en: "Founder, Studio Line", de: "Gründerin, Studio Line" },
     quote: {
       en: "I felt completely at ease the whole time. The photos look like me on a really good day.",
@@ -24,6 +26,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r2",
     name: "David R.",
+    photo: "/images/reviews/r2.jpg",
     role: { en: "Team Lead", de: "Teamleiter" },
     quote: {
       en: "Clear direction, zero awkwardness. The whole team actually likes using these headshots.",
@@ -33,6 +36,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r3",
     name: "Elena K.",
+    photo: "/images/reviews/r3.jpg",
     quote: {
       en: "It never felt posed. Just relaxed conversation and real moments we'll keep forever.",
       de: "Es hat sich nie gestellt angefühlt. Nur entspannte Gespräche und echte Momente, die wir für immer behalten.",
@@ -41,6 +45,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r4",
     name: "Marco B.",
+    photo: "/images/reviews/r4.jpg",
     role: { en: "Operations Manager", de: "Operations Manager" },
     quote: {
       en: "Professional, warm, and fast to work with. Every image in the gallery was usable.",
@@ -50,6 +55,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r5",
     name: "Julia T.",
+    photo: "/images/reviews/r5.jpg",
     quote: {
       en: "Best photography experience I've had. Patient, calm, and genuinely good at putting people at ease.",
       de: "Die beste Fotografie-Erfahrung, die ich je hatte. Geduldig, ruhig und wirklich gut darin, Menschen zu entspannen.",
@@ -58,6 +64,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r6",
     name: "Nina & Paul",
+    photo: "/images/reviews/r6.jpg",
     quote: {
       en: "Our engagement photos feel like us, not like a staged shoot. We look back at them often.",
       de: "Unsere Verlobungsfotos fühlen sich nach uns an, nicht nach einem gestellten Shooting. Wir schauen sie oft an.",
@@ -66,6 +73,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r7",
     name: "Carlos V.",
+    photo: "/images/reviews/r7.jpg",
     role: { en: "Consultant", de: "Berater" },
     quote: {
       en: "Exactly the LinkedIn-ready content I needed, delivered quickly and with clear guidance throughout.",
@@ -75,6 +83,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r8",
     name: "Laura S.",
+    photo: "/images/reviews/r8.jpg",
     quote: {
       en: "Gentle direction made all the difference. I've never enjoyed being photographed until now.",
       de: "Die sanfte Anleitung hat den Unterschied gemacht. Ich habe es noch nie genossen, fotografiert zu werden — bis jetzt.",
@@ -83,6 +92,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r9",
     name: "Tobias H.",
+    photo: "/images/reviews/r9.jpg",
     role: { en: "Founder", de: "Gründer" },
     quote: {
       en: "Sharp, natural branding photos that finally match how our company actually feels.",
@@ -92,6 +102,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r10",
     name: "Anna P.",
+    photo: "/images/reviews/r10.jpg",
     quote: {
       en: "A calm, unrushed session that produced some of my favorite photos of myself.",
       de: "Eine ruhige, entspannte Session, aus der einige meiner liebsten Fotos von mir entstanden sind.",
@@ -100,6 +111,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r11",
     name: "Michael F.",
+    photo: "/images/reviews/r11.jpg",
     role: { en: "Event Organiser", de: "Eventorganisator" },
     quote: {
       en: "Coverage was thorough and unobtrusive — guests barely noticed the camera.",
@@ -109,6 +121,7 @@ const rawReviews: RawReview[] = [
   {
     id: "r12",
     name: "Isabelle D.",
+    photo: "/images/reviews/r12.jpg",
     quote: {
       en: "From first message to gallery delivery, everything was simple and clearly communicated.",
       de: "Von der ersten Nachricht bis zur Lieferung der Galerie war alles einfach und klar kommuniziert.",
@@ -120,6 +133,7 @@ export function getReviews(locale: Locale): Review[] {
   return rawReviews.map((r) => ({
     id: r.id,
     name: r.name,
+    photo: r.photo,
     role: r.role?.[locale],
     quote: r.quote[locale],
   }));
