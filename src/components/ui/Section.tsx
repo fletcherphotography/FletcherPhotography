@@ -14,7 +14,7 @@ export function Section({
   as?: "section" | "div";
 }) {
   return (
-    <As className={clsx("py-16 sm:py-24", className)}>
+    <As className={clsx("py-12", className)}>
       <Container className={containerClassName}>{children}</Container>
     </As>
   );
