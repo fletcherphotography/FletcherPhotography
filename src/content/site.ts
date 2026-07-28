@@ -4,7 +4,6 @@ export const site = {
   email: "fletcherphotography.zh@gmail.com",
   instagram: "https://www.instagram.com/photobyfletcher",
   location: "Switzerland",
-  calcomUsername: "your-username", // TODO: replace with the real Cal.com username/event slug
 };
 
 export function whatsappHref(message?: string) {

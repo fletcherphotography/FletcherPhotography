@@ -8,7 +8,6 @@ export type Dictionary = {
     about: string;
     reviews: string;
     contact: string;
-    booking: string;
   };
   common: {
     viewPortfolio: string;
@@ -16,7 +15,6 @@ export type Dictionary = {
     letsWorkTogetherTitle: string;
     letsWorkTogetherText: string;
     contactWhatsApp: string;
-    bookNow: string;
   };
   home: {
     heroEyebrow: string;
@@ -58,7 +56,6 @@ export type Dictionary = {
     success: string;
     error: string;
   };
-  booking: { eyebrow: string; title: string; subtitle: string; calNote: string };
   footer: { whatsapp: string; email: string; instagram: string; contact: string };
 };
 
@@ -71,7 +68,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       about: "About",
       reviews: "Reviews",
       contact: "Contact",
-      booking: "Booking",
     },
     common: {
       viewPortfolio: "View portfolio",
@@ -80,7 +76,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       letsWorkTogetherText:
         "Tell me what you are planning, and let's create images with presence, purpose and real feeling.",
       contactWhatsApp: "Contact via WhatsApp",
-      bookNow: "Book Now",
     },
     home: {
       heroEyebrow: "Photography in Switzerland",
@@ -143,13 +138,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       success: "Thank you your message is on its way. I'll get back to you as soon as possible.",
       error: "Something went wrong. Please try again.",
     },
-    booking: {
-      eyebrow: "Booking",
-      title: "Book your session",
-      subtitle:
-        "Pick a time that works for you — the call is a short, no-pressure chat about your idea, timing and location.",
-      calNote: "If the calendar doesn't load, you can also reach out via WhatsApp or the contact form.",
-    },
     footer: {
       whatsapp: "WhatsApp",
       email: "Email",
@@ -165,7 +153,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       about: "Über mich",
       reviews: "Bewertungen",
       contact: "Kontakt",
-      booking: "Termin buchen",
     },
     common: {
       viewPortfolio: "Portfolio ansehen",
@@ -174,7 +161,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       letsWorkTogetherText:
         "Erzähl mir, was du vorhast, und lass uns Bilder mit Präsenz, Zweck und echtem Gefühl schaffen.",
       contactWhatsApp: "Per WhatsApp kontaktieren",
-      bookNow: "Jetzt buchen",
     },
     home: {
       heroEyebrow: "Fotografie in der Schweiz",
@@ -236,14 +222,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       sending: "Wird gesendet...",
       success: "Danke, deine Nachricht ist unterwegs. Ich melde mich so schnell wie möglich.",
       error: "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
-    },
-    booking: {
-      eyebrow: "Termin buchen",
-      title: "Buche deine Session",
-      subtitle:
-        "Wähle einen passenden Termin — das Gespräch ist ein kurzer, unverbindlicher Austausch über deine Idee, Timing und Location.",
-      calNote:
-        "Falls der Kalender nicht lädt, kannst du mich auch per WhatsApp oder über das Kontaktformular erreichen.",
     },
     footer: {
       whatsapp: "WhatsApp",

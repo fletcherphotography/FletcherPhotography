@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import clsx from "clsx";
 import { site } from "@/content/site";
 import { Locale, locales } from "@/i18n/config";
@@ -31,8 +30,6 @@ export function Header({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const items = navItems(locale);
-  const dict = getDictionary(locale);
-  const bookingHref = `/${locale}/booking`;
 
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200 bg-neutral-50/90 backdrop-blur">
@@ -66,14 +63,6 @@ export function Header({ locale }: { locale: Locale }) {
               </Link>
             ))}
           </div>
-          <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }}>
-            <Link
-              href={bookingHref}
-              className="rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-neutral-700"
-            >
-              {dict.common.bookNow}
-            </Link>
-          </motion.div>
         </nav>
 
         <button
@@ -109,13 +98,6 @@ export function Header({ locale }: { locale: Locale }) {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href={bookingHref}
-              onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white"
-            >
-              {dict.common.bookNow}
-            </Link>
             <div className="mt-3 flex gap-3 border-t border-neutral-200 pt-3 text-xs font-medium uppercase tracking-wide text-neutral-400">
               {locales.map((loc) => (
                 <Link
