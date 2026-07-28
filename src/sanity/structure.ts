@@ -26,6 +26,17 @@ export const structure: StructureResolver = (S) =>
                   photoList(S, "Hero image", '_type == "photo" && slot == "hero"', {}, "photo-hero")
                 ),
               S.listItem()
+                .title("Gallery photos (after intro)")
+                .child(
+                  photoList(
+                    S,
+                    "Gallery photos",
+                    '_type == "photo" && slot == "home-gallery"',
+                    {},
+                    "photo-home-gallery"
+                  )
+                ),
+              S.listItem()
                 .title("Testimonials")
                 .child(
                   S.list()

@@ -9,6 +9,12 @@ const templates: Template[] = [
     value: { slot: "hero", alt: "Homepage hero photo" },
   },
   {
+    id: "photo-home-gallery",
+    title: "Home — gallery photo",
+    schemaType: "photo",
+    value: { slot: "home-gallery", alt: "Home gallery photo" },
+  },
+  {
     id: "photo-about-portrait",
     title: "About portrait",
     schemaType: "photo",

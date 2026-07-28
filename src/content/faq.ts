@@ -15,61 +15,54 @@ type RawFaqItem = {
 const rawFaqItems: RawFaqItem[] = [
   {
     id: "f1",
-    question: { en: "How do I book a session?", de: "Wie buche ich eine Session?" },
+    question: {
+      en: "What kind of photography do you offer?",
+      de: "Welche Art von Fotografie bietest du an?",
+    },
     answer: {
-      en: "Send a message via the contact form or WhatsApp with a few details about what you have in mind, and I'll get back to you with next steps and availability.",
-      de: "Schick mir eine Nachricht über das Kontaktformular oder WhatsApp mit ein paar Details zu deiner Idee, und ich melde mich mit den nächsten Schritten und freien Terminen.",
+      en: "I focus on portrait photography for individuals, entrepreneurs, professionals, teams and companies. This includes personal branding portraits, business portraits, company portraits and corporate events, as well as portraits and love stories for private clients.",
+      de: "Mein Fokus liegt auf Portraitfotografie für Einzelpersonen, Unternehmer:innen, Fachleute, Teams und Unternehmen. Dazu gehören Personal-Branding-Portraits, Business-Portraits, Unternehmensportraits und Firmenevents sowie Portraits und Love Stories für private Kund:innen.",
     },
   },
   {
     id: "f2",
-    question: { en: "What should I wear?", de: "Was soll ich anziehen?" },
+    question: {
+      en: "Do I need to know how to pose?",
+      de: "Muss ich wissen, wie ich posieren soll?",
+    },
     answer: {
-      en: "After booking you'll receive a personal guide covering outfit ideas, timing and posing support tailored to your session.",
-      de: "Nach der Buchung erhältst du einen persönlichen Guide mit Outfit-Ideen, Timing und Posing-Tipps, abgestimmt auf deine Session.",
+      en: "No. Before the shoot, you'll get a short guide with posing tips, so you know what to expect. And during the shoot itself, I'll guide you through the poses, so you can just relax and let me take care of the rest.",
+      de: "Nein. Vor dem Shooting erhältst du einen kurzen Guide mit Posing-Tipps, damit du weisst, was dich erwartet. Und während des Shootings leite ich dich durch die Posen, sodass du dich einfach entspannen kannst.",
     },
   },
   {
     id: "f3",
-    question: { en: "Where do the sessions take place?", de: "Wo finden die Sessions statt?" },
+    question: { en: "Where do you work?", de: "Wo arbeitest du?" },
     answer: {
-      en: "Sessions can take place at your office, a location of your choice, or a studio — we'll agree on the best fit during the preparation call.",
-      de: "Sessions können in deinem Büro, an einem Ort deiner Wahl oder im Studio stattfinden — wir klären den besten Ort im Vorgespräch.",
+      en: "Based in Zurich, available across Switzerland.",
+      de: "Mit Sitz in Zürich, verfügbar in der ganzen Schweiz.",
     },
   },
   {
     id: "f4",
-    question: { en: "How long does a session take?", de: "Wie lange dauert eine Session?" },
+    question: {
+      en: "How quickly will I receive my photos?",
+      de: "Wie schnell erhalte ich meine Fotos?",
+    },
     answer: {
-      en: "Most sessions run between 45 minutes and 2 hours depending on the type of shoot, discussed and confirmed before the day.",
-      de: "Die meisten Sessions dauern je nach Art des Shootings zwischen 45 Minuten und 2 Stunden, abgesprochen vor dem Termin.",
+      en: "Delivery depends on the type of session and the number of images. In most cases, portrait sessions are delivered within 5 working days after the selection.",
+      de: "Die Lieferzeit hängt von der Art der Session und der Anzahl der Bilder ab. In den meisten Fällen werden Portrait-Sessions innerhalb von 5 Werktagen nach der Auswahl geliefert.",
     },
   },
   {
     id: "f5",
-    question: { en: "When will I receive my photos?", de: "Wann erhalte ich meine Fotos?" },
-    answer: {
-      en: "You'll receive your edited online gallery within a few days of the shoot, ready to use and share.",
-      de: "Du erhältst deine bearbeitete Online-Galerie innerhalb weniger Tage nach dem Shooting, bereit zum Nutzen und Teilen.",
-    },
-  },
-  {
-    id: "f6",
     question: {
-      en: "Do you travel for events or corporate shoots?",
-      de: "Reist du für Events oder Firmenshootings?",
+      en: "Can you help me prepare for the shoot?",
+      de: "Hilfst du mir bei der Vorbereitung auf das Shooting?",
     },
     answer: {
-      en: "Yes, I photograph businesses and events across Switzerland — travel can be arranged as part of your quote.",
-      de: "Ja, ich fotografiere Unternehmen und Events in der ganzen Schweiz — Reisen können Teil deines Angebots sein.",
-    },
-  },
-  {
-    id: "f7",
-    question: { en: "How much does a session cost?", de: "Was kostet eine Session?" },
-    answer: {
-      en: "Pricing depends on the type of session. Get in touch for a tailored quote based on your needs.",
-      de: "Der Preis hängt von der Art der Session ab. Melde dich für ein individuelles Angebot.",
+      en: "Yes. Before every session, we have a short call to discuss the concept, location and outfits. I also send you a preparation guide with posing tips ahead of time.",
+      de: "Ja. Vor jeder Session sprechen wir kurz telefonisch über Konzept, Location und Outfits. Zusätzlich schicke ich dir vorab einen Vorbereitungs-Guide mit Posing-Tipps.",
     },
   },
 ];

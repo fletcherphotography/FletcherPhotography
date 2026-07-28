@@ -39,6 +39,13 @@ export async function getAboutPortraitUrl(): Promise<string | undefined> {
   return docs[0] ? urlFor(docs[0].image).width(1200).url() : undefined;
 }
 
+export async function getHomeGalleryUrls(): Promise<string[]> {
+  const docs = await safeFetch<SanityPhotoDoc>(
+    `*[_type == "photo" && slot == "home-gallery"] | order(order asc, _createdAt asc)`
+  );
+  return docs.map((d) => urlFor(d.image).width(900).url());
+}
+
 export async function getAboutBtsUrls(): Promise<string[]> {
   const docs = await safeFetch<SanityPhotoDoc>(
     `*[_type == "photo" && slot == "about-bts"] | order(order asc, _createdAt asc)`

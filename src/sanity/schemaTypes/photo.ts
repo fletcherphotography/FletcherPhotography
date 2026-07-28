@@ -3,6 +3,7 @@ import { portfolioTaxonomy, testimonialPeople, reviewPeople } from "../portfolio
 
 const SLOTS = [
   { title: "Home hero background", value: "hero" },
+  { title: "Home — gallery photo (after intro)", value: "home-gallery" },
   { title: "About — portrait", value: "about-portrait" },
   { title: "About — behind the scenes", value: "about-bts" },
   { title: "Testimonial photo (Home page)", value: "testimonial" },

@@ -20,10 +20,8 @@ export type Dictionary = {
     heroEyebrow: string;
     heroTitle: string;
     heroText: string;
-    introTitle1: string;
-    introText1: string;
-    introTitle2: string;
-    introText2: string;
+    trustTitle: string;
+    trustText: string;
     testimonialsTitle: string;
     processEyebrow: string;
     processTitle: string;
@@ -78,16 +76,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contactWhatsApp: "Contact via WhatsApp",
     },
     home: {
-      heroEyebrow: "Photography in Switzerland",
-      heroTitle: "Images with presence, purpose and real feeling.",
+      heroEyebrow: "Professional photography in Switzerland",
+      heroTitle: "Portraits for your professional image and your story",
       heroText:
-        "Relaxed, natural photography for businesses, personal branding and portraits — created for the moments that matter.",
-      introTitle1: "You feel at ease during the shoot",
-      introText1:
-        "Clear, relaxed direction helps you look natural and confident, without feeling overly posed.",
-      introTitle2: "You receive images with purpose",
-      introText2:
-        "Photography created for your website, social media, marketing, press, team communication or a meaningful personal memory.",
+        "Based in Zurich, I create natural portraits for individuals, entrepreneurs, professionals, teams and companies — across Zurich and Switzerland. Every session is planned around you: your goals, your comfort and how the images will actually be used — for your website, LinkedIn, press, or simply for yourself. The result is always the same — natural, professional images that feel like you.",
+      trustTitle: "Working with individuals and companies",
+      trustText:
+        "Alongside personal portraits, I work with companies, teams and brands across Zurich and Switzerland — on portraits, events and imagery for professional communication.",
       testimonialsTitle: "Kind words and the faces behind them",
       processEyebrow: "Process",
       processTitle: "Simple from first message to final gallery",
@@ -163,16 +158,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contactWhatsApp: "Per WhatsApp kontaktieren",
     },
     home: {
-      heroEyebrow: "Fotografie in der Schweiz",
-      heroTitle: "Bilder mit Präsenz, Zweck und echtem Gefühl.",
+      heroEyebrow: "Professionelle Fotografie in der Schweiz",
+      heroTitle: "Portraits für dein berufliches Bild und deine Geschichte",
       heroText:
-        "Entspannte, natürliche Fotografie für Unternehmen, Personal Branding und Portraits — für die Momente, die zählen.",
-      introTitle1: "Du fühlst dich beim Shooting wohl",
-      introText1:
-        "Klare, entspannte Anleitung hilft dir, natürlich und selbstbewusst zu wirken, ohne dich gestellt zu fühlen.",
-      introTitle2: "Du erhältst Bilder mit Zweck",
-      introText2:
-        "Fotografie für deine Website, Social Media, Marketing, Presse, interne Kommunikation oder eine bedeutungsvolle persönliche Erinnerung.",
+        "Mit Sitz in Zürich fotografiere ich natürliche Portraits für Einzelpersonen, Unternehmer:innen, Fachleute, Teams und Unternehmen — in Zürich und der ganzen Schweiz. Jede Session wird auf dich abgestimmt: deine Ziele, dein Wohlbefinden und wie die Bilder tatsächlich genutzt werden — für deine Website, LinkedIn, die Presse oder einfach für dich selbst. Das Ergebnis ist immer dasselbe: natürliche, professionelle Bilder, die wirklich nach dir aussehen.",
+      trustTitle: "Zusammenarbeit mit Einzelpersonen und Unternehmen",
+      trustText:
+        "Neben persönlichen Portraits arbeite ich mit Unternehmen, Teams und Marken in Zürich und der ganzen Schweiz zusammen — für Portraits, Events und Bildmaterial für die professionelle Kommunikation.",
       testimonialsTitle: "Nette Worte und die Gesichter dahinter",
       processEyebrow: "Ablauf",
       processTitle: "Einfach von der ersten Nachricht bis zur fertigen Galerie",

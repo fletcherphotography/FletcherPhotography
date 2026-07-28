@@ -1,19 +1,26 @@
+import Link from "next/link";
 import { Section, SectionHeading } from "@/components/ui/Section";
+import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { Hero } from "@/components/Hero";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { ProcessStepCard } from "@/components/ProcessStep";
 import { LogoStrip } from "@/components/LogoStrip";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { CTASection } from "@/components/CTASection";
-import { Button } from "@/components/ui/Button";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn";
 import { getTestimonials } from "@/content/testimonials";
 import { getProcessSteps } from "@/content/process";
 import { brandLogos } from "@/content/brandLogos";
 import { getFaqItems } from "@/content/faq";
+import { getHomeServiceCards } from "@/content/homeServices";
 import { resolveLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { getHeroImageUrl, getPersonPhotoUrls, getBrandLogos } from "@/sanity/queries";
+import {
+  getHeroImageUrl,
+  getHomeGalleryUrls,
+  getPersonPhotoUrls,
+  getBrandLogos,
+} from "@/sanity/queries";
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const locale = resolveLocale((await params).locale);
@@ -21,9 +28,11 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const testimonials = getTestimonials(locale);
   const processSteps = getProcessSteps(locale);
   const faqItems = getFaqItems(locale);
+  const serviceCards = getHomeServiceCards(locale);
 
-  const [heroImageUrl, personPhotos, sanityLogos] = await Promise.all([
+  const [heroImageUrl, galleryUrls, personPhotos, sanityLogos] = await Promise.all([
     getHeroImageUrl(),
+    getHomeGalleryUrls(),
     getPersonPhotoUrls(testimonials.map((t) => t.id)),
     getBrandLogos(),
   ]);
@@ -39,34 +48,48 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     <>
       <Hero locale={locale} imageSrc={heroImageUrl} />
 
-      {/* Intro */}
+      {/* Gallery grid after intro */}
       <Section className="pt-20 sm:pt-28">
+        <FadeInStagger className="grid grid-cols-3 gap-3 sm:gap-4">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <FadeInStaggerItem key={i}>
+              <PlaceholderImage
+                label={`Home photo ${i + 1}`}
+                src={galleryUrls[i]}
+                className="aspect-[3/4] w-full"
+              />
+            </FadeInStaggerItem>
+          ))}
+        </FadeInStagger>
+      </Section>
+
+      {/* Services teaser */}
+      <Section className="bg-neutral-50">
+        <FadeInStagger className="grid gap-10 sm:grid-cols-3">
+          {serviceCards.map((card) => (
+            <FadeInStaggerItem key={card.slug}>
+              <Link href={`/${locale}/services`} className="group block">
+                <h2 className="font-[family-name:var(--font-display)] text-xl font-medium text-neutral-900 group-hover:underline">
+                  {card.title}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-neutral-600">
+                  {card.description}
+                </p>
+              </Link>
+            </FadeInStaggerItem>
+          ))}
+        </FadeInStagger>
+      </Section>
+
+      {/* Trust block */}
+      <Section containerClassName="max-w-2xl text-center">
         <FadeIn>
-          <div className="grid gap-10 sm:grid-cols-2 sm:gap-16">
-            <div>
-              <h2 className="font-[family-name:var(--font-display)] text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
-                {dict.home.introTitle1}
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-neutral-600">
-                {dict.home.introText1}
-              </p>
-            </div>
-            <div>
-              <h2 className="font-[family-name:var(--font-display)] text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
-                {dict.home.introTitle2}
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-neutral-600">
-                {dict.home.introText2}
-              </p>
-            </div>
-          </div>
-          <div className="mt-10">
-            <Button href={`/${locale}/portfolio`}>{dict.common.viewPortfolio}</Button>
-          </div>
+          <SectionHeading title={dict.home.trustTitle} align="center" />
+          <p className="mt-4 text-base leading-relaxed text-neutral-600">{dict.home.trustText}</p>
         </FadeIn>
       </Section>
 
-      {/* Block 6: testimonials */}
+      {/* Testimonials */}
       <Section className="bg-neutral-50">
         <FadeIn>
           <SectionHeading title={dict.home.testimonialsTitle} align="center" />
@@ -80,7 +103,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </FadeInStagger>
       </Section>
 
-      {/* Block 7: process */}
+      {/* Process */}
       <Section>
         <FadeIn>
           <SectionHeading eyebrow={dict.home.processEyebrow} title={dict.home.processTitle} />
@@ -94,7 +117,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </FadeInStagger>
       </Section>
 
-      {/* Block 8: brands */}
+      {/* Brands */}
       <Section className="bg-neutral-50">
         <FadeIn>
           <SectionHeading title={dict.home.brandsTitle} align="center" />
@@ -104,7 +127,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </FadeIn>
       </Section>
 
-      {/* Block 9: FAQ */}
+      {/* FAQ */}
       <Section containerClassName="max-w-3xl">
         <FadeIn>
           <SectionHeading title={dict.home.faqTitle} />
