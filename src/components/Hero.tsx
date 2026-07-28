@@ -33,7 +33,7 @@ function AnimatedHeadline({ text }: { text: string }) {
   );
 }
 
-export function Hero({ locale }: { locale: Locale }) {
+export function Hero({ locale, imageSrc }: { locale: Locale; imageSrc?: string }) {
   const dict = getDictionary(locale);
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -52,7 +52,7 @@ export function Hero({ locale }: { locale: Locale }) {
       <motion.div style={{ y: imageY }} className="absolute inset-0 h-[120%] w-full">
         <PlaceholderImage
           label=""
-          src="/images/hero/hero-1.jpg"
+          src={imageSrc ?? "/images/hero/hero-1.jpg"}
           rounded="none"
           dark
           priority

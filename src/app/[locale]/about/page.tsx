@@ -5,6 +5,7 @@ import { CTASection } from "@/components/CTASection";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn";
 import { locales, resolveLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { getAboutPortraitUrl, getAboutBtsUrls } from "@/sanity/queries";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -23,6 +24,7 @@ export async function generateMetadata({
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = resolveLocale((await params).locale);
   const dict = getDictionary(locale);
+  const [portraitUrl, btsUrls] = await Promise.all([getAboutPortraitUrl(), getAboutBtsUrls()]);
 
   return (
     <>
@@ -30,7 +32,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <FadeIn className="grid gap-10 sm:grid-cols-2 sm:gap-16">
           <PlaceholderImage
             label="Portrait"
-            src="/images/about/portrait.jpg"
+            src={portraitUrl ?? "/images/about/portrait.jpg"}
             className="aspect-[4/5] w-full"
           />
           <div>
@@ -59,7 +61,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <div className="overflow-hidden rounded-md">
                 <PlaceholderImage
                   label={`Behind the scenes ${i + 1}`}
-                  src={`/images/about/bts-${i + 1}.jpg`}
+                  src={btsUrls[i] ?? `/images/about/bts-${i + 1}.jpg`}
                   className="aspect-[4/5] w-full transition-transform duration-500 ease-out hover:scale-105"
                 />
               </div>

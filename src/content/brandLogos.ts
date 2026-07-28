@@ -2,6 +2,7 @@ export type BrandLogo = {
   id: string;
   name: string;
   href?: string;
+  imageUrl?: string;
 };
 
 // "Trusted by Brands and Organisations Across Switzerland" — 8 logos.

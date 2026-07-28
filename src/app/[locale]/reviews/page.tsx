@@ -6,6 +6,7 @@ import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn
 import { getReviews } from "@/content/reviews";
 import { locales, resolveLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { getPersonPhotoUrls } from "@/sanity/queries";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -25,6 +26,8 @@ export default async function ReviewsPage({ params }: { params: Promise<{ locale
   const locale = resolveLocale((await params).locale);
   const dict = getDictionary(locale);
   const reviews = getReviews(locale);
+  const personPhotos = await getPersonPhotoUrls(reviews.map((r) => r.id));
+  const reviewsWithPhotos = reviews.map((r) => ({ ...r, photo: personPhotos[r.id] ?? r.photo }));
 
   return (
     <>
@@ -40,7 +43,7 @@ export default async function ReviewsPage({ params }: { params: Promise<{ locale
 
       <Section className="pt-0">
         <FadeInStagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {reviews.map((review) => (
+          {reviewsWithPhotos.map((review) => (
             <FadeInStaggerItem key={review.id}>
               <TestimonialCard item={review} />
             </FadeInStaggerItem>

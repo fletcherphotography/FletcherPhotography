@@ -13,6 +13,7 @@ import { brandLogos } from "@/content/brandLogos";
 import { getFaqItems } from "@/content/faq";
 import { resolveLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { getHeroImageUrl, getPersonPhotoUrls, getBrandLogos } from "@/sanity/queries";
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const locale = resolveLocale((await params).locale);
@@ -21,9 +22,22 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const processSteps = getProcessSteps(locale);
   const faqItems = getFaqItems(locale);
 
+  const [heroImageUrl, personPhotos, sanityLogos] = await Promise.all([
+    getHeroImageUrl(),
+    getPersonPhotoUrls(testimonials.map((t) => t.id)),
+    getBrandLogos(),
+  ]);
+  const testimonialsWithPhotos = testimonials.map((t) => ({
+    ...t,
+    photo: personPhotos[t.id] ?? t.photo,
+  }));
+  const logos = sanityLogos.length > 0
+    ? sanityLogos.map((l, i) => ({ id: `sanity-${i}`, name: l.name, href: l.link, imageUrl: l.url }))
+    : brandLogos;
+
   return (
     <>
-      <Hero locale={locale} />
+      <Hero locale={locale} imageSrc={heroImageUrl} />
 
       {/* Intro */}
       <Section className="pt-20 sm:pt-28">
@@ -58,7 +72,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <SectionHeading title={dict.home.testimonialsTitle} align="center" />
         </FadeIn>
         <FadeInStagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {testimonials.map((t) => (
+          {testimonialsWithPhotos.map((t) => (
             <FadeInStaggerItem key={t.id}>
               <TestimonialCard item={t} />
             </FadeInStaggerItem>
@@ -85,7 +99,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <FadeIn>
           <SectionHeading title={dict.home.brandsTitle} align="center" />
           <div className="mt-12">
-            <LogoStrip logos={brandLogos} />
+            <LogoStrip logos={logos} />
           </div>
         </FadeIn>
       </Section>

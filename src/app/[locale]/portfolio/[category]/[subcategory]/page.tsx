@@ -11,6 +11,7 @@ import {
 } from "@/content/portfolio";
 import { locales, resolveLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { getPortfolioPhotoUrls } from "@/sanity/queries";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -46,7 +47,16 @@ export default async function SubcategoryPage({
   const found = getSubcategory(locale, category, subcategory);
   if (!found) notFound();
 
-  const photos = getSubcategoryPhotos(category, subcategory);
+  const staticPhotos = getSubcategoryPhotos(category, subcategory);
+  const sanityUrls = await getPortfolioPhotoUrls(category, subcategory);
+  const photos =
+    sanityUrls.length > 0
+      ? sanityUrls.map((src, i) => ({
+          id: `${category}-${subcategory}-sanity-${i}`,
+          alt: `${found.subcategory.title} photo ${i + 1}`,
+          src,
+        }))
+      : staticPhotos;
 
   return (
     <>

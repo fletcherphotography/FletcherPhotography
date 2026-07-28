@@ -8,6 +8,7 @@ import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn
 import { getAllCategoryParams, getCategory } from "@/content/portfolio";
 import { locales, resolveLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { getPortfolioCoverUrl } from "@/sanity/queries";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -39,6 +40,10 @@ export default async function CategoryPage({
   const category = getCategory(locale, categorySlug);
   if (!category) notFound();
 
+  const coverUrls = await Promise.all(
+    category.subcategories.map((sub) => getPortfolioCoverUrl(category.slug, sub.slug))
+  );
+
   return (
     <>
       <Section className="pt-20 sm:pt-28" containerClassName="max-w-3xl">
@@ -54,13 +59,13 @@ export default async function CategoryPage({
 
       <Section className="pt-0">
         <FadeInStagger className="grid gap-8 sm:grid-cols-3">
-          {category.subcategories.map((sub) => (
+          {category.subcategories.map((sub, i) => (
             <FadeInStaggerItem key={sub.slug}>
               <Link href={`/${locale}/portfolio/${category.slug}/${sub.slug}`} className="group block">
                 <div className="overflow-hidden rounded-md">
                   <PlaceholderImage
                     label={sub.title}
-                    src={sub.coverImage}
+                    src={coverUrls[i] ?? sub.coverImage}
                     className="aspect-[4/5] w-full transition-transform duration-500 ease-out group-hover:scale-105"
                   />
                 </div>
