@@ -118,13 +118,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <FadeIn>
           <SectionHeading eyebrow={dict.home.processEyebrow} title={dict.home.processTitle} />
         </FadeIn>
-        <FadeInStagger className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {processSteps.map((step) => (
-            <FadeInStaggerItem key={step.id}>
-              <ProcessStepCard item={step} />
-            </FadeInStaggerItem>
-          ))}
-        </FadeInStagger>
+        <div className="relative mt-12">
+          <div className="absolute inset-x-0 top-5 hidden border-t-2 border-dashed border-neutral-300 lg:block" />
+          <FadeInStagger className="relative grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {processSteps.map((step) => (
+              <FadeInStaggerItem key={step.id}>
+                <ProcessStepCard item={step} />
+              </FadeInStaggerItem>
+            ))}
+          </FadeInStagger>
+        </div>
       </Section>
 
       {/* Brands */}

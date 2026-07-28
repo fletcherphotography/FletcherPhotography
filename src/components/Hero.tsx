@@ -90,7 +90,10 @@ export function Hero({ locale, imageSrc }: { locale: Locale; imageSrc?: string }
           transition={{ duration: 0.7, delay: 0.6 }}
           className="mt-10 flex flex-wrap gap-4"
         >
-          <Button href={`/${locale}/portfolio`} className="bg-white text-neutral-900 hover:bg-white/90">
+          <Button
+            href={`/${locale}/portfolio`}
+            className="!bg-white !text-neutral-900 hover:!bg-neutral-100"
+          >
             {dict.common.viewPortfolio}
           </Button>
           <Button
