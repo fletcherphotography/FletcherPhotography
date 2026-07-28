@@ -44,7 +44,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <FadeIn>
           <div className="grid gap-10 sm:grid-cols-2 sm:gap-16">
             <div>
-              <h2 className="text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
+              <h2 className="font-[family-name:var(--font-display)] text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
                 {dict.home.introTitle1}
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-600">
@@ -52,7 +52,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               </p>
             </div>
             <div>
-              <h2 className="text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
+              <h2 className="font-[family-name:var(--font-display)] text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
                 {dict.home.introTitle2}
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-600">

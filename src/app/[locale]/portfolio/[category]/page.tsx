@@ -69,7 +69,7 @@ export default async function CategoryPage({
                     className="aspect-[4/5] w-full transition-transform duration-500 ease-out group-hover:scale-105"
                   />
                 </div>
-                <h3 className="mt-4 text-lg font-medium text-neutral-900 group-hover:underline">
+                <h3 className="mt-4 font-[family-name:var(--font-display)] text-lg font-medium text-neutral-900 group-hover:underline">
                   {sub.title}
                 </h3>
               </Link>

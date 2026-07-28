@@ -47,7 +47,7 @@ export default async function ServicesPage({
         <Section key={group.slug} className={i % 2 === 1 ? "bg-neutral-50" : undefined}>
           <FadeIn className="grid gap-10 sm:grid-cols-2 sm:gap-16">
             <div>
-              <h2 className="text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
+              <h2 className="font-[family-name:var(--font-display)] text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
                 {group.title}
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-600">{group.intro}</p>

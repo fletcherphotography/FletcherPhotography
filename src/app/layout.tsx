@@ -1,12 +1,12 @@
-import { Inter, Playfair_Display } from "next/font/google";
+import { Raleway, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const sans = Inter({
+const sans = Raleway({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const displaySerif = Playfair_Display({
+const displayHeading = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -14,7 +14,7 @@ const displaySerif = Playfair_Display({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${displaySerif.variable} h-full antialiased`}>
+    <html lang="en" className={`${sans.variable} ${displayHeading.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

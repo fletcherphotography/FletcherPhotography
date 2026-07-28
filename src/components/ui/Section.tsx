@@ -38,7 +38,7 @@ export function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <h2 className="text-3xl font-light tracking-tight text-neutral-900 sm:text-4xl">
+      <h2 className="font-[family-name:var(--font-display)] text-3xl font-light tracking-tight text-neutral-900 sm:text-4xl">
         {title}
       </h2>
       {subtitle && <p className="mt-4 text-base text-neutral-600">{subtitle}</p>}

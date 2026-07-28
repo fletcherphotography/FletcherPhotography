@@ -36,7 +36,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             className="aspect-[4/5] w-full"
           />
           <div>
-            <h1 className="text-3xl font-light tracking-tight text-neutral-900 sm:text-4xl">
+            <h1 className="font-[family-name:var(--font-display)] text-3xl font-light tracking-tight text-neutral-900 sm:text-4xl">
               {dict.about.heading}
             </h1>
             <p className="mt-6 text-base leading-relaxed text-neutral-600">{dict.about.intro1}</p>
