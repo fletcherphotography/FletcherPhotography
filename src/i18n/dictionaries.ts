@@ -29,7 +29,13 @@ export type Dictionary = {
     faqTitle: string;
   };
   portfolio: { eyebrow: string; title: string; subtitle: string };
-  services: { eyebrow: string; title: string; subtitle: string };
+  services: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    whatsIncluded: string;
+    sessionsHeading: string;
+  };
   about: {
     heading: string;
     intro1: string;
@@ -100,6 +106,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       title: "Photography for every kind of story",
       subtitle:
         "Clear, structured sessions with no overwhelming price lists — get in touch for a quote tailored to you.",
+      whatsIncluded: "What's included",
+      sessionsHeading: "Sessions",
     },
     about: {
       heading: "Hi, I'm Anna",
@@ -182,6 +190,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       title: "Fotografie für jede Art von Geschichte",
       subtitle:
         "Klare, strukturierte Sessions ohne überladene Preislisten — melde dich für ein individuelles Angebot.",
+      whatsIncluded: "Das ist inklusive",
+      sessionsHeading: "Sessions",
     },
     about: {
       heading: "Hallo, ich bin Anna",
