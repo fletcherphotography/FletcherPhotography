@@ -44,6 +44,18 @@ const templates: Template[] = [
       },
     })
   ),
+  ...portfolioTaxonomy.map(
+    (category): Template => ({
+      id: `photo-service-${category.slug}`,
+      title: `${category.title} — services page photo`,
+      schemaType: "photo",
+      value: {
+        slot: "service-photo",
+        category: category.slug,
+        alt: `${category.title} services photo`,
+      },
+    })
+  ),
   ...testimonialPeople.map(
     (p): Template => ({
       id: `photo-testimonial-${p.id}`,

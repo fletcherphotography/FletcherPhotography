@@ -116,6 +116,27 @@ export const structure: StructureResolver = (S) =>
             )
         ),
       S.listItem()
+        .title("Services page")
+        .child(
+          S.list()
+            .title("Services page")
+            .items(
+              portfolioTaxonomy.map((category) =>
+                S.listItem()
+                  .title(category.title)
+                  .child(
+                    photoList(
+                      S,
+                      category.title,
+                      '_type == "photo" && slot == "service-photo" && category == $category',
+                      { category: category.slug },
+                      `photo-service-${category.slug}`
+                    )
+                  )
+              )
+            )
+        ),
+      S.listItem()
         .title("Portfolio")
         .child(
           S.list()

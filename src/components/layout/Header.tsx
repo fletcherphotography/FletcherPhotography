@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import clsx from "clsx";
@@ -34,8 +35,8 @@ export function Header({ locale }: { locale: Locale }) {
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200 bg-neutral-50/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-8">
-        <Link href={`/${locale}`} className="text-base font-medium tracking-tight text-neutral-900">
-          {site.name}
+        <Link href={`/${locale}`} className="flex items-center" aria-label={site.name}>
+          <Image src="/Header.jpg" alt={site.name} width={40} height={40} className="rounded-full" priority />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">

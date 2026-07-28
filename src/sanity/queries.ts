@@ -106,6 +106,14 @@ export async function getCategoryCoverUrl(category: string): Promise<string | un
   return docs[0] ? urlFor(docs[0].image).width(1200).url() : undefined;
 }
 
+export async function getServicePhotoUrl(service: string): Promise<string | undefined> {
+  const docs = await safeFetch<SanityPhotoDoc>(
+    `*[_type == "photo" && slot == "service-photo" && category == $category] | order(_createdAt desc) [0...1]`,
+    { category: service }
+  );
+  return docs[0] ? urlFor(docs[0].image).width(1200).url() : undefined;
+}
+
 export type BrandLogoDoc = { name: string; url: string; link?: string };
 
 export async function getBrandLogos(): Promise<BrandLogoDoc[]> {

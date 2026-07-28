@@ -2,10 +2,12 @@ import { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/CTASection";
+import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { getServiceGroups } from "@/content/services";
 import { locales, resolveLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { getServicePhotoUrl } from "@/sanity/queries";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -29,6 +31,9 @@ export default async function ServicesPage({
   const locale = resolveLocale((await params).locale);
   const dict = getDictionary(locale);
   const serviceGroups = getServiceGroups(locale);
+  const photoUrls = await Promise.all(
+    serviceGroups.map((group) => getServicePhotoUrl(group.slug))
+  );
 
   return (
     <>
@@ -44,26 +49,33 @@ export default async function ServicesPage({
 
       {serviceGroups.map((group, i) => (
         <Section key={group.slug} className={i % 2 === 1 ? "bg-neutral-50" : undefined}>
-          <FadeIn className="max-w-2xl">
-            <h2 className="font-[family-name:var(--font-display)] text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
-              {group.title}
-            </h2>
-            {group.tagline && (
-              <p className="mt-1 text-sm font-medium uppercase tracking-widest text-neutral-500">
-                {group.tagline}
-              </p>
-            )}
-            <div className="mt-6 flex flex-col gap-4">
-              {group.introParagraphs.map((paragraph, idx) => (
-                <p key={idx} className="text-base leading-relaxed text-neutral-600">
-                  {paragraph}
+          <FadeIn className="grid gap-10 sm:grid-cols-2 sm:gap-16">
+            <div>
+              <h2 className="font-[family-name:var(--font-display)] text-2xl font-light tracking-tight text-neutral-900 sm:text-3xl">
+                {group.title}
+              </h2>
+              {group.tagline && (
+                <p className="mt-1 text-sm font-medium uppercase tracking-widest text-neutral-500">
+                  {group.tagline}
                 </p>
-              ))}
+              )}
+              <div className="mt-6 flex flex-col gap-4">
+                {group.introParagraphs.map((paragraph, idx) => (
+                  <p key={idx} className="text-base leading-relaxed text-neutral-600">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+              <p className="mt-6 text-base font-medium text-neutral-900">{group.pricingFrom}</p>
+              <div className="mt-8">
+                <Button href={`/${locale}/contact`}>{group.ctaLabel}</Button>
+              </div>
             </div>
-            <p className="mt-6 text-base font-medium text-neutral-900">{group.pricingFrom}</p>
-            <div className="mt-8">
-              <Button href={`/${locale}/contact`}>{group.ctaLabel}</Button>
-            </div>
+            <PlaceholderImage
+              label={group.title}
+              src={photoUrls[i]}
+              className="aspect-[4/5] w-full"
+            />
           </FadeIn>
 
           <div className="mt-12 grid gap-10 sm:grid-cols-3">
