@@ -32,6 +32,10 @@ export const photo = defineType({
       title: "Where does this photo go?",
       type: "string",
       options: { list: SLOTS, layout: "radio" },
+      // Set automatically by the initial-value template when creating from a
+      // section in the Studio's structure (Home/About/Reviews/Portfolio), so
+      // it doesn't need to be shown or picked manually.
+      hidden: true,
       validation: (rule) => rule.required(),
     }),
     defineField({
