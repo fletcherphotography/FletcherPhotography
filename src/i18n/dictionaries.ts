@@ -28,7 +28,7 @@ export type Dictionary = {
     brandsTitle: string;
     faqTitle: string;
   };
-  portfolio: { eyebrow: string; title: string; subtitle: string };
+  portfolio: { eyebrow: string; title: string; subtitle: string; backToPortfolio: string };
   services: {
     eyebrow: string;
     title: string;
@@ -100,6 +100,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       title: "Work, organised by what you need it for",
       subtitle:
         "Explore photography across three categories — business and events, personal branding, and portraits and love stories.",
+      backToPortfolio: "Back to Portfolio",
     },
     services: {
       eyebrow: "Services",
@@ -184,6 +185,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       title: "Arbeiten, geordnet nach deinem Bedarf",
       subtitle:
         "Entdecke Fotografie in drei Kategorien — Business & Events, Personal Branding sowie Portraits & Love Stories.",
+      backToPortfolio: "Zurück zum Portfolio",
     },
     services: {
       eyebrow: "Leistungen",

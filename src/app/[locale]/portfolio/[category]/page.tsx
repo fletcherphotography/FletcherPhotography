@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { GalleryGrid } from "@/components/GalleryGrid";
 import { CTASection } from "@/components/CTASection";
+import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { getAllCategoryParams, getCategory, getCategoryPhotos } from "@/content/portfolio";
 import { locales, resolveLocale } from "@/i18n/config";
@@ -54,6 +55,9 @@ export default async function CategoryPage({
     <>
       <Section className="pt-20 sm:pt-28" containerClassName="max-w-3xl">
         <FadeIn>
+          <Button href={`/${locale}/portfolio`} variant="secondary" className="mb-8">
+            ← {dict.portfolio.backToPortfolio}
+          </Button>
           <SectionHeading
             eyebrow={dict.portfolio.eyebrow}
             title={category.title}

@@ -71,7 +71,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <FadeInStagger className="grid gap-10 sm:grid-cols-3">
           {serviceCards.map((card, i) => (
             <FadeInStaggerItem key={card.slug}>
-              <Link href={`/${locale}/services`} className="group block">
+              <Link href={`/${locale}/portfolio/${card.slug}`} className="group block">
                 <div className="overflow-hidden rounded-md">
                   <PlaceholderImage
                     label={card.title}
