@@ -74,26 +74,14 @@ export async function getPersonPhotoUrls(personIds: string[]): Promise<Record<st
   return map;
 }
 
-export async function getPortfolioPhotoUrls(
-  category: string,
-  subcategory: string
-): Promise<string[]> {
+// One shared gallery per category — subcategory is no longer used to split
+// the gallery, only kept on documents as optional organizational metadata.
+export async function getPortfolioPhotoUrls(category: string): Promise<string[]> {
   const docs = await safeFetch<SanityPhotoDoc>(
-    `*[_type == "photo" && slot == "portfolio" && category == $category && subcategory == $subcategory] | order(order asc, _createdAt asc)`,
-    { category, subcategory }
+    `*[_type == "photo" && slot == "portfolio" && category == $category] | order(order asc, _createdAt asc)`,
+    { category }
   );
   return docs.map((d) => urlFor(d.image).width(1200).url());
-}
-
-export async function getPortfolioCoverUrl(
-  category: string,
-  subcategory: string
-): Promise<string | undefined> {
-  const docs = await safeFetch<SanityPhotoDoc>(
-    `*[_type == "photo" && slot == "portfolio" && category == $category && subcategory == $subcategory] | order(order asc, _createdAt asc) [0...1]`,
-    { category, subcategory }
-  );
-  return docs[0] ? urlFor(docs[0].image).width(1200).url() : undefined;
 }
 
 // Dedicated category cover, used on the /portfolio landing page and the

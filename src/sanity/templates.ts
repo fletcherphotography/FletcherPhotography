@@ -72,20 +72,17 @@ const templates: Template[] = [
       value: { slot: "review", personId: p.id, alt: p.name },
     })
   ),
-  ...portfolioTaxonomy.flatMap((category) =>
-    category.subcategories.map(
-      (sub): Template => ({
-        id: `photo-portfolio-${category.slug}-${sub.slug}`,
-        title: `${category.title} — ${sub.title} photo`,
-        schemaType: "photo",
-        value: {
-          slot: "portfolio",
-          category: category.slug,
-          subcategory: sub.slug,
-          alt: `${sub.title} photo`,
-        },
-      })
-    )
+  ...portfolioTaxonomy.map(
+    (category): Template => ({
+      id: `photo-portfolio-${category.slug}`,
+      title: `${category.title} — gallery photo`,
+      schemaType: "photo",
+      value: {
+        slot: "portfolio",
+        category: category.slug,
+        alt: `${category.title} photo`,
+      },
+    })
   ),
 ];
 

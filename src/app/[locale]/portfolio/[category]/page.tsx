@@ -1,14 +1,13 @@
-import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { GalleryGrid } from "@/components/GalleryGrid";
 import { CTASection } from "@/components/CTASection";
-import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn";
-import { getAllCategoryParams, getCategory } from "@/content/portfolio";
+import { FadeIn } from "@/components/ui/FadeIn";
+import { getAllCategoryParams, getCategory, getCategoryPhotos } from "@/content/portfolio";
 import { locales, resolveLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { getPortfolioCoverUrl } from "@/sanity/queries";
+import { getPortfolioPhotoUrls } from "@/sanity/queries";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -40,9 +39,16 @@ export default async function CategoryPage({
   const category = getCategory(locale, categorySlug);
   if (!category) notFound();
 
-  const coverUrls = await Promise.all(
-    category.subcategories.map((sub) => getPortfolioCoverUrl(category.slug, sub.slug))
-  );
+  const staticPhotos = getCategoryPhotos(category.slug);
+  const sanityUrls = await getPortfolioPhotoUrls(category.slug);
+  const photos =
+    sanityUrls.length > 0
+      ? sanityUrls.map((src, i) => ({
+          id: `${category.slug}-sanity-${i}`,
+          alt: `${category.title} photo ${i + 1}`,
+          src,
+        }))
+      : staticPhotos;
 
   return (
     <>
@@ -54,28 +60,27 @@ export default async function CategoryPage({
             subtitle={category.description}
           />
           <p className="mt-6 text-base leading-relaxed text-neutral-600">{category.intro}</p>
+
+          <h2 className="mt-10 text-sm font-medium uppercase tracking-widest text-neutral-500">
+            {dict.services.sessionsHeading}
+          </h2>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {category.subcategoryNames.map((name) => (
+              <span
+                key={name}
+                className="rounded-full border border-neutral-300 px-4 py-1.5 text-sm text-neutral-700"
+              >
+                {name}
+              </span>
+            ))}
+          </div>
         </FadeIn>
       </Section>
 
       <Section className="pt-0">
-        <FadeInStagger className="grid gap-8 sm:grid-cols-3">
-          {category.subcategories.map((sub, i) => (
-            <FadeInStaggerItem key={sub.slug}>
-              <Link href={`/${locale}/portfolio/${category.slug}/${sub.slug}`} className="group block">
-                <div className="overflow-hidden rounded-md">
-                  <PlaceholderImage
-                    label={sub.title}
-                    src={coverUrls[i] ?? sub.coverImage}
-                    className="aspect-[4/5] w-full transition-transform duration-500 ease-out group-hover:scale-105"
-                  />
-                </div>
-                <h3 className="mt-4 font-[family-name:var(--font-display)] text-lg font-medium text-neutral-900 group-hover:underline">
-                  {sub.title}
-                </h3>
-              </Link>
-            </FadeInStaggerItem>
-          ))}
-        </FadeInStagger>
+        <FadeIn>
+          <GalleryGrid photos={photos} />
+        </FadeIn>
       </Section>
 
       <Section>

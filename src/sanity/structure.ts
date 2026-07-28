@@ -163,29 +163,27 @@ export const structure: StructureResolver = (S) =>
                       )
                     )
                 ),
-              ...portfolioTaxonomy.map((category) =>
-                S.listItem()
-                  .title(category.title)
-                  .child(
-                    S.list()
-                      .title(category.title)
-                      .items(
-                        category.subcategories.map((sub) =>
-                          S.listItem()
-                            .title(sub.title)
-                            .child(
-                              photoList(
-                                S,
-                                sub.title,
-                                '_type == "photo" && slot == "portfolio" && category == $category && subcategory == $subcategory',
-                                { category: category.slug, subcategory: sub.slug },
-                                `photo-portfolio-${category.slug}-${sub.slug}`
-                              )
+              S.listItem()
+                .title("Category galleries")
+                .child(
+                  S.list()
+                    .title("Category galleries")
+                    .items(
+                      portfolioTaxonomy.map((category) =>
+                        S.listItem()
+                          .title(category.title)
+                          .child(
+                            photoList(
+                              S,
+                              category.title,
+                              '_type == "photo" && slot == "portfolio" && category == $category',
+                              { category: category.slug },
+                              `photo-portfolio-${category.slug}`
                             )
-                        )
+                          )
                       )
-                  )
-              ),
+                    )
+                ),
             ])
         ),
     ]);
