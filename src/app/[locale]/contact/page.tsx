@@ -3,7 +3,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { ContactForm } from "@/components/ContactForm";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { site, whatsappHref } from "@/content/site";
-import { WhatsAppIcon, EmailIcon } from "@/components/icons/SocialIcons";
+import { WhatsAppIcon, EmailIcon, InstagramIcon } from "@/components/icons/SocialIcons";
 import { locales, resolveLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
@@ -48,6 +48,16 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-300 text-neutral-600 transition-colors hover:border-neutral-900 hover:text-neutral-900"
           >
             <EmailIcon className="h-5 w-5" />
+          </a>
+          <a
+            href={site.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            title="Instagram"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-300 text-neutral-600 transition-colors hover:border-neutral-900 hover:text-neutral-900"
+          >
+            <InstagramIcon className="h-5 w-5" />
           </a>
         </div>
 
