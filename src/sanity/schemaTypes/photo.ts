@@ -8,6 +8,7 @@ const SLOTS = [
   { title: "About — behind the scenes", value: "about-bts" },
   { title: "Testimonial photo (Home page)", value: "testimonial" },
   { title: "Review photo (Reviews page)", value: "review" },
+  { title: "Portfolio category cover (Home + Portfolio page)", value: "category-cover" },
   { title: "Portfolio gallery photo", value: "portfolio" },
   { title: "Brand logo (Home page)", value: "logo" },
 ];
@@ -65,7 +66,7 @@ export const photo = defineType({
       title: "Portfolio category",
       type: "string",
       options: { list: PORTFOLIO_CATEGORIES },
-      hidden: ({ document }) => document?.slot !== "portfolio",
+      hidden: ({ document }) => !["portfolio", "category-cover"].includes(document?.slot as string),
     }),
     defineField({
       name: "subcategory",

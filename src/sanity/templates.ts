@@ -32,6 +32,18 @@ const templates: Template[] = [
     schemaType: "photo",
     value: { slot: "logo", alt: "Brand logo" },
   },
+  ...portfolioTaxonomy.map(
+    (category): Template => ({
+      id: `photo-category-cover-${category.slug}`,
+      title: `${category.title} — cover photo`,
+      schemaType: "photo",
+      value: {
+        slot: "category-cover",
+        category: category.slug,
+        alt: `${category.title} cover photo`,
+      },
+    })
+  ),
   ...testimonialPeople.map(
     (p): Template => ({
       id: `photo-testimonial-${p.id}`,

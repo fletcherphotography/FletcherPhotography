@@ -20,6 +20,7 @@ import {
   getHomeGalleryUrls,
   getPersonPhotoUrls,
   getBrandLogos,
+  getCategoryCoverUrl,
 } from "@/sanity/queries";
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
@@ -30,12 +31,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const faqItems = getFaqItems(locale);
   const serviceCards = getHomeServiceCards(locale);
 
-  const [heroImageUrl, galleryUrls, personPhotos, sanityLogos] = await Promise.all([
-    getHeroImageUrl(),
-    getHomeGalleryUrls(),
-    getPersonPhotoUrls(testimonials.map((t) => t.id)),
-    getBrandLogos(),
-  ]);
+  const [heroImageUrl, galleryUrls, personPhotos, sanityLogos, serviceCoverUrls] =
+    await Promise.all([
+      getHeroImageUrl(),
+      getHomeGalleryUrls(),
+      getPersonPhotoUrls(testimonials.map((t) => t.id)),
+      getBrandLogos(),
+      Promise.all(serviceCards.map((card) => getCategoryCoverUrl(card.slug))),
+    ]);
   const testimonialsWithPhotos = testimonials.map((t) => ({
     ...t,
     photo: personPhotos[t.id] ?? t.photo,
@@ -66,10 +69,17 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       {/* Services teaser */}
       <Section className="bg-neutral-50">
         <FadeInStagger className="grid gap-10 sm:grid-cols-3">
-          {serviceCards.map((card) => (
+          {serviceCards.map((card, i) => (
             <FadeInStaggerItem key={card.slug}>
               <Link href={`/${locale}/services`} className="group block">
-                <h2 className="font-[family-name:var(--font-display)] text-xl font-medium text-neutral-900 group-hover:underline">
+                <div className="overflow-hidden rounded-md">
+                  <PlaceholderImage
+                    label={card.title}
+                    src={serviceCoverUrls[i]}
+                    className="aspect-[4/5] w-full transition-transform duration-500 ease-out group-hover:scale-105"
+                  />
+                </div>
+                <h2 className="mt-4 font-[family-name:var(--font-display)] text-xl font-medium text-neutral-900 group-hover:underline">
                   {card.title}
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-neutral-600">

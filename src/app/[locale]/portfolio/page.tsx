@@ -7,7 +7,7 @@ import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/FadeIn
 import { getPortfolioCategories } from "@/content/portfolio";
 import { locales, resolveLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { getPortfolioCoverUrl } from "@/sanity/queries";
+import { getCategoryCoverUrl } from "@/sanity/queries";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -32,7 +32,7 @@ export default async function PortfolioPage({
   const dict = getDictionary(locale);
   const portfolioCategories = getPortfolioCategories(locale);
   const coverUrls = await Promise.all(
-    portfolioCategories.map((category) => getPortfolioCoverUrl(category.slug))
+    portfolioCategories.map((category) => getCategoryCoverUrl(category.slug))
   );
 
   return (

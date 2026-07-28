@@ -87,17 +87,22 @@ export async function getPortfolioPhotoUrls(
 
 export async function getPortfolioCoverUrl(
   category: string,
-  subcategory?: string
+  subcategory: string
 ): Promise<string | undefined> {
-  const docs = subcategory
-    ? await safeFetch<SanityPhotoDoc>(
-        `*[_type == "photo" && slot == "portfolio" && category == $category && subcategory == $subcategory] | order(order asc, _createdAt asc) [0...1]`,
-        { category, subcategory }
-      )
-    : await safeFetch<SanityPhotoDoc>(
-        `*[_type == "photo" && slot == "portfolio" && category == $category] | order(order asc, _createdAt asc) [0...1]`,
-        { category }
-      );
+  const docs = await safeFetch<SanityPhotoDoc>(
+    `*[_type == "photo" && slot == "portfolio" && category == $category && subcategory == $subcategory] | order(order asc, _createdAt asc) [0...1]`,
+    { category, subcategory }
+  );
+  return docs[0] ? urlFor(docs[0].image).width(1200).url() : undefined;
+}
+
+// Dedicated category cover, used on the /portfolio landing page and the
+// Home page service teaser cards.
+export async function getCategoryCoverUrl(category: string): Promise<string | undefined> {
+  const docs = await safeFetch<SanityPhotoDoc>(
+    `*[_type == "photo" && slot == "category-cover" && category == $category] | order(_createdAt desc) [0...1]`,
+    { category }
+  );
   return docs[0] ? urlFor(docs[0].image).width(1200).url() : undefined;
 }
 

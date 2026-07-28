@@ -120,8 +120,29 @@ export const structure: StructureResolver = (S) =>
         .child(
           S.list()
             .title("Portfolio")
-            .items(
-              portfolioTaxonomy.map((category) =>
+            .items([
+              S.listItem()
+                .title("Category covers (Home + Portfolio page)")
+                .child(
+                  S.list()
+                    .title("Category covers")
+                    .items(
+                      portfolioTaxonomy.map((category) =>
+                        S.listItem()
+                          .title(category.title)
+                          .child(
+                            photoList(
+                              S,
+                              category.title,
+                              '_type == "photo" && slot == "category-cover" && category == $category',
+                              { category: category.slug },
+                              `photo-category-cover-${category.slug}`
+                            )
+                          )
+                      )
+                    )
+                ),
+              ...portfolioTaxonomy.map((category) =>
                 S.listItem()
                   .title(category.title)
                   .child(
@@ -143,7 +164,7 @@ export const structure: StructureResolver = (S) =>
                         )
                       )
                   )
-              )
-            )
+              ),
+            ])
         ),
     ]);
