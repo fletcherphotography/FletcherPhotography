@@ -4,6 +4,7 @@ export const site = {
   email: "fletcherphotography.zh@gmail.com",
   instagram: "https://www.instagram.com/photobyfletcher",
   location: "Switzerland",
+  contactFromEmail: "Fletcher Photography <noreply@fletcherphotography.ch>",
 };
 
 export function whatsappHref(message?: string) {
