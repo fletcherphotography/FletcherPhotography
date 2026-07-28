@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { portfolioTaxonomy, testimonialPeople, reviewPeople } from "../portfolioTaxonomy";
 
 const SLOTS = [
   { title: "Home hero background", value: "hero" },
@@ -10,28 +11,15 @@ const SLOTS = [
   { title: "Brand logo (Home page)", value: "logo" },
 ];
 
-const PORTFOLIO_CATEGORIES = [
-  { title: "Business & Events", value: "business-events" },
-  { title: "Personal Branding", value: "personal-branding" },
-  { title: "Portraits & Love Stories", value: "portraits-love-stories" },
-];
+const PORTFOLIO_CATEGORIES = portfolioTaxonomy.map((c) => ({ title: c.title, value: c.slug }));
 
-const PORTFOLIO_SUBCATEGORIES = [
-  { title: "Business Headshots", value: "business-headshots" },
-  { title: "Team Photography", value: "team-photography" },
-  { title: "Corporate Events", value: "corporate-events" },
-  { title: "Founders & Entrepreneurs", value: "founders-entrepreneurs" },
-  { title: "Creatives & Experts", value: "creatives-experts" },
-  { title: "Branding Content", value: "branding-content" },
-  { title: "Individual Portraits", value: "individual-portraits" },
-  { title: "Couples & Love Stories", value: "couples-love-stories" },
-  { title: "Lifestyle Portraits", value: "lifestyle-portraits" },
-];
+const PORTFOLIO_SUBCATEGORIES = portfolioTaxonomy.flatMap((c) =>
+  c.subcategories.map((s) => ({ title: s.title, value: s.slug }))
+);
 
-// Must match the testimonial/review ids in src/content/testimonials.ts and src/content/reviews.ts
 const PERSON_IDS = [
-  "t1", "t2", "t3", "t4",
-  "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12",
+  ...testimonialPeople.map((p) => ({ title: `${p.name} (Home testimonial)`, value: p.id })),
+  ...reviewPeople.map((p) => ({ title: `${p.name} (Review)`, value: p.id })),
 ];
 
 export const photo = defineType({
@@ -61,7 +49,7 @@ export const photo = defineType({
     }),
     defineField({
       name: "personId",
-      title: "Person (testimonial/review id)",
+      title: "Person (testimonial/review)",
       description: "Which testimonial or review card this photo belongs to.",
       type: "string",
       options: { list: PERSON_IDS },
